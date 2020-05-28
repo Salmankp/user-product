@@ -40011,7 +40011,7 @@ var staticRenderFns = [
       _c(
         "a",
         {
-          staticClass: "btn btn-info btn-icon btn-sm edit",
+          staticClass: "btn btn-info! btn-icon btn-sm edit",
           attrs: { href: "#" }
         },
         [_c("i", { staticClass: "fa fa-edit" })]

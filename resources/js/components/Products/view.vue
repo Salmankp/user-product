@@ -43,7 +43,7 @@
                                         <td>{{add_product.title}}</td>
                                         <td>{{add_product.short_desc}}}</td>
                                         <td>{{user.name}}</td>
-                                        <td> <a href="#" class="btn btn-info btn-icon btn-sm edit">
+                                        <td> <a href="#" class="btn btn-info! btn-icon btn-sm edit">
                                             <i class="fa fa-edit"></i></a>
                                             <a href="#" class="btn btn-danger btn-icon btn-sm edit">
                                                 <i class="fa fa-edit"></i></a>
