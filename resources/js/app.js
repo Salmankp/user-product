@@ -7,6 +7,7 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
+Vue.component('view-products', require('./components/Products/view').default);
 
 /**
  * The following block of code may be used to automatically register your

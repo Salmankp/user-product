@@ -1932,6 +1932,499 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Products/view.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Products/view.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "view.vue",
+  props: ['user'],
+  data: function data() {
+    return {
+      add_product: {
+        'title': '',
+        'sku': '',
+        'short_desc': '',
+        'desc': '',
+        'keyword': '',
+        'category': '',
+        'trade_name': '',
+        'brand_name': '',
+        'internal_sku': '',
+        'manufact_number': '',
+        'product_source': '',
+        'source_url': '',
+        'product_code': '',
+        'remarks': '',
+        'buying_price': '',
+        'weight': '',
+        'size_length': '',
+        'size_width': '',
+        'size_height': '',
+        'dom_freight': '',
+        'int_freight': '',
+        'discount': '',
+        'stock': '',
+        'Fill_time': '',
+        'extra_field1': '',
+        'extra_field2': '',
+        'extra_field3': '',
+        'extra_field4': '',
+        'extra_field5': '',
+        'approval_status': false,
+        'shelf_status': false,
+        'product_type': false
+      }
+    };
+  },
+  created: function created() {},
+  mounted: function mounted() {
+    var _this = this;
+
+    setTimeout(function () {
+      jQuery.noConflict();
+      $(document).ready(function () {
+        $('#ajax-datatable').DataTable({});
+      });
+    }, 600);
+    axios.get('/get/product', {}).then(function (response) {
+      _this.add_product.title = response.data[0].title;
+      _this.add_product.short_desc = response.data[0].short_description;
+    });
+  },
+  methods: {
+    submit_product: function submit_product() {
+      axios.post('/add/product', {
+        product: this.add_product,
+        user: this.user
+      }).then(function (response) {
+        if (response.data == 'success') {
+          swal({
+            title: 'Success!',
+            text: 'Product Successfully Added',
+            type: 'success',
+            confirmButtonClass: "btn btn-success",
+            buttonsStyling: false
+          }); // this.table.draw();
+
+          $('#exampleModal').modal('toggle');
+        }
+      });
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/bootstrap/dist/js/bootstrap.js":
 /*!*****************************************************!*\
   !*** ./node_modules/bootstrap/dist/js/bootstrap.js ***!
@@ -37507,6 +38000,2065 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Products/view.vue?vue&type=template&id=e27d47d6&scoped=true&":
+/*!****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Products/view.vue?vue&type=template&id=e27d47d6&scoped=true& ***!
+  \****************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "row" }, [
+    _c("div", { staticClass: "col-md-10" }),
+    _vm._v(" "),
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { staticClass: " col-md-12" }, [
+      _c("div", { staticClass: "card-body" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: " col-sm-12" }, [
+            _c("div", { staticClass: "card card-shadow mb-4" }, [
+              _vm._m(1),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "dataTables_wrapper container-fluid dt-bootstrap4",
+                    attrs: { id: "ajax-datatable_wrapper" }
+                  },
+                  [
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-sm-12" }, [
+                        _c(
+                          "table",
+                          {
+                            staticClass:
+                              "display table table-bordered table-striped dataTable",
+                            staticStyle: { width: "100%" },
+                            attrs: {
+                              id: "ajax-datatable",
+                              role: "grid",
+                              "aria-describedby": "ajax-datatable_info"
+                            }
+                          },
+                          [
+                            _vm._m(2),
+                            _vm._v(" "),
+                            _vm._m(3),
+                            _vm._v(" "),
+                            _c("tbody", [
+                              _c(
+                                "tr",
+                                { staticClass: "odd", attrs: { role: "row" } },
+                                [
+                                  _c("td", { staticClass: "sorting_1" }, [
+                                    _vm._v("Airi Satou")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", [
+                                    _vm._v(_vm._s(_vm.add_product.title))
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", [
+                                    _vm._v(
+                                      _vm._s(_vm.add_product.short_desc) + "}"
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", [_vm._v(_vm._s(_vm.user.name))]),
+                                  _vm._v(" "),
+                                  _vm._m(4)
+                                ]
+                              )
+                            ])
+                          ]
+                        )
+                      ])
+                    ])
+                  ]
+                )
+              ])
+            ])
+          ])
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "exampleModal",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "exampleModalLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass: "modal-dialog",
+            staticStyle: { "max-width": "1200px" },
+            attrs: { role: "document" }
+          },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(5),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-md-3" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "exampleInputEmail1" } }, [
+                        _vm._v("Title")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.add_product.title,
+                            expression: "add_product.title"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          "aria-describedby": "emailHelp",
+                          placeholder: "Enter Title"
+                        },
+                        domProps: { value: _vm.add_product.title },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.add_product,
+                              "title",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-3" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "exampleInputEmail1" } }, [
+                        _vm._v("Sku")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.add_product.sku,
+                            expression: "add_product.sku"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          "aria-describedby": "emailHelp",
+                          placeholder: "Enter Sku"
+                        },
+                        domProps: { value: _vm.add_product.sku },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.add_product,
+                              "sku",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-3" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "exampleInputEmail1" } }, [
+                        _vm._v("Keywords")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.add_product.keyword,
+                            expression: "add_product.keyword"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          "aria-describedby": "emailHelp",
+                          placeholder: "Enter Keyword"
+                        },
+                        domProps: { value: _vm.add_product.keyword },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.add_product,
+                              "keyword",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-3" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "exampleInputEmail1" } }, [
+                        _vm._v("Category")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.add_product.category,
+                            expression: "add_product.category"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          "aria-describedby": "emailHelp",
+                          placeholder: "Enter Category"
+                        },
+                        domProps: { value: _vm.add_product.category },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.add_product,
+                              "category",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-md-6" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "exampleInputEmail1" } }, [
+                        _vm._v("Description")
+                      ]),
+                      _vm._v(" "),
+                      _c("textarea", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.add_product.desc,
+                            expression: "add_product.desc"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          rows: "4",
+                          "aria-describedby": "emailHelp",
+                          placeholder: "Enter Description"
+                        },
+                        domProps: { value: _vm.add_product.desc },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.add_product,
+                              "desc",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-6" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "exampleInputEmail1" } }, [
+                        _vm._v("Short Description")
+                      ]),
+                      _vm._v(" "),
+                      _c("textarea", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.add_product.short_desc,
+                            expression: "add_product.short_desc"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          rows: "4",
+                          "aria-describedby": "emailHelp",
+                          placeholder: "Enter Description"
+                        },
+                        domProps: { value: _vm.add_product.short_desc },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.add_product,
+                              "short_desc",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-md-3" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "exampleInputEmail1" } }, [
+                        _vm._v("Trade Name")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.add_product.trade_name,
+                            expression: "add_product.trade_name"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          "aria-describedby": "emailHelp",
+                          placeholder: "Enter Trade Name"
+                        },
+                        domProps: { value: _vm.add_product.trade_name },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.add_product,
+                              "trade_name",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-3" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "exampleInputEmail1" } }, [
+                        _vm._v("Brand Name")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.add_product.brand_name,
+                            expression: "add_product.brand_name"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          "aria-describedby": "emailHelp",
+                          placeholder: "Enter Brand Name"
+                        },
+                        domProps: { value: _vm.add_product.brand_name },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.add_product,
+                              "brand_name",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-3" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "exampleInputEmail1" } }, [
+                        _vm._v("Internal SKU")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.add_product.internal_sku,
+                            expression: "add_product.internal_sku"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          "aria-describedby": "emailHelp",
+                          placeholder: "Enter Internal SKU"
+                        },
+                        domProps: { value: _vm.add_product.internal_sku },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.add_product,
+                              "internal_sku",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-3" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "exampleInputEmail1" } }, [
+                        _vm._v("Manufacture Number")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.add_product.manufact_number,
+                            expression: "add_product.manufact_number"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          "aria-describedby": "emailHelp",
+                          placeholder: "Enter Manufacture Number"
+                        },
+                        domProps: { value: _vm.add_product.manufact_number },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.add_product,
+                              "manufact_number",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-md-3" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "exampleInputEmail1" } }, [
+                        _vm._v("Product Source")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.add_product.product_source,
+                            expression: "add_product.product_source"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          "aria-describedby": "emailHelp",
+                          placeholder: "Enter Product Source"
+                        },
+                        domProps: { value: _vm.add_product.product_source },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.add_product,
+                              "product_source",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-3" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "exampleInputEmail1" } }, [
+                        _vm._v("Source URL")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.add_product.source_url,
+                            expression: "add_product.source_url"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          "aria-describedby": "emailHelp",
+                          placeholder: "Enter Source URl"
+                        },
+                        domProps: { value: _vm.add_product.source_url },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.add_product,
+                              "source_url",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-3" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "exampleInputEmail1" } }, [
+                        _vm._v("Product Code")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.add_product.product_code,
+                            expression: "add_product.product_code"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          "aria-describedby": "emailHelp",
+                          placeholder: "Enter Product Code"
+                        },
+                        domProps: { value: _vm.add_product.product_code },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.add_product,
+                              "product_code",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-3" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "exampleInputEmail1" } }, [
+                        _vm._v("Remarks")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.add_product.remarks,
+                            expression: "add_product.remarks"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          "aria-describedby": "emailHelp",
+                          placeholder: "Enter Remarks"
+                        },
+                        domProps: { value: _vm.add_product.remarks },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.add_product,
+                              "remarks",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-md-3" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "exampleInputEmail1" } }, [
+                        _vm._v("Buying Price")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.add_product.buying_price,
+                            expression: "add_product.buying_price"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          "aria-describedby": "emailHelp",
+                          placeholder: "Enter Buying Price"
+                        },
+                        domProps: { value: _vm.add_product.buying_price },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.add_product,
+                              "buying_price",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-3" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "exampleInputEmail1" } }, [
+                        _vm._v("Weight")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.add_product.weight,
+                            expression: "add_product.weight"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          "aria-describedby": "emailHelp",
+                          placeholder: "Enter Weight"
+                        },
+                        domProps: { value: _vm.add_product.weight },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.add_product,
+                              "weight",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-3" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "exampleInputEmail1" } }, [
+                        _vm._v("Size Length")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.add_product.size_length,
+                            expression: "add_product.size_length"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          "aria-describedby": "emailHelp",
+                          placeholder: "Enter Size Length"
+                        },
+                        domProps: { value: _vm.add_product.size_length },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.add_product,
+                              "size_length",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-3" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "exampleInputEmail1" } }, [
+                        _vm._v("Size Width")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.add_product.size_width,
+                            expression: "add_product.size_width"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          "aria-describedby": "emailHelp",
+                          placeholder: "Enter Size Width"
+                        },
+                        domProps: { value: _vm.add_product.size_width },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.add_product,
+                              "size_width",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-md-3" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "exampleInputEmail1" } }, [
+                        _vm._v("Size Height")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.add_product.size_height,
+                            expression: "add_product.size_height"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          "aria-describedby": "emailHelp",
+                          placeholder: "Enter Size Height"
+                        },
+                        domProps: { value: _vm.add_product.size_height },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.add_product,
+                              "size_height",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-3" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "exampleInputEmail1" } }, [
+                        _vm._v("Domestic Freight")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.add_product.dom_freight,
+                            expression: "add_product.dom_freight"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          "aria-describedby": "emailHelp",
+                          placeholder: "Enter Domestic Freight"
+                        },
+                        domProps: { value: _vm.add_product.dom_freight },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.add_product,
+                              "dom_freight",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-3" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "exampleInputEmail1" } }, [
+                        _vm._v("International Freight")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.add_product.int_freight,
+                            expression: "add_product.int_freight"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          "aria-describedby": "emailHelp",
+                          placeholder: "Enter International Freight"
+                        },
+                        domProps: { value: _vm.add_product.int_freight },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.add_product,
+                              "int_freight",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-3" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "exampleInputEmail1" } }, [
+                        _vm._v("Discount")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.add_product.discount,
+                            expression: "add_product.discount"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          "aria-describedby": "emailHelp",
+                          placeholder: "Enter Discount"
+                        },
+                        domProps: { value: _vm.add_product.discount },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.add_product,
+                              "discount",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-md-3" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "exampleInputEmail1" } }, [
+                        _vm._v("Stock")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.add_product.stock,
+                            expression: "add_product.stock"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          "aria-describedby": "emailHelp",
+                          placeholder: "Enter Stock"
+                        },
+                        domProps: { value: _vm.add_product.stock },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.add_product,
+                              "stock",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-3" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "exampleInputEmail1" } }, [
+                        _vm._v("Fill Time")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.add_product.Fill_time,
+                            expression: "add_product.Fill_time"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          "aria-describedby": "emailHelp",
+                          placeholder: "Enter Fill Time"
+                        },
+                        domProps: { value: _vm.add_product.Fill_time },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.add_product,
+                              "Fill_time",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-3" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "exampleInputEmail1" } }, [
+                        _vm._v("Extra Field 1")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.add_product.extra_field1,
+                            expression: "add_product.extra_field1"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          "aria-describedby": "emailHelp",
+                          placeholder: "Enter Extra Field 1"
+                        },
+                        domProps: { value: _vm.add_product.extra_field1 },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.add_product,
+                              "extra_field1",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-3" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "exampleInputEmail1" } }, [
+                        _vm._v("Extra Field 2")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.add_product.extra_field2,
+                            expression: "add_product.extra_field2"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          "aria-describedby": "emailHelp",
+                          placeholder: "Enter Extra Field 2"
+                        },
+                        domProps: { value: _vm.add_product.extra_field2 },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.add_product,
+                              "extra_field2",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-md-4" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "exampleInputEmail1" } }, [
+                        _vm._v("Extra Field 3")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.add_product.extra_field3,
+                            expression: "add_product.extra_field3"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          "aria-describedby": "emailHelp",
+                          placeholder: "Enter Extra Field 3"
+                        },
+                        domProps: { value: _vm.add_product.extra_field3 },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.add_product,
+                              "extra_field3",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-4" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "exampleInputEmail1" } }, [
+                        _vm._v("Extra Field 4")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.add_product.extra_field4,
+                            expression: "add_product.extra_field4"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          "aria-describedby": "emailHelp",
+                          placeholder: "Enter Extra Field 4"
+                        },
+                        domProps: { value: _vm.add_product.extra_field4 },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.add_product,
+                              "extra_field4",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-4" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "exampleInputEmail1" } }, [
+                        _vm._v("Extra Field 5")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.add_product.extra_field5,
+                            expression: "add_product.extra_field5"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          "aria-describedby": "emailHelp",
+                          placeholder: "Enter Extra Field 5"
+                        },
+                        domProps: { value: _vm.add_product.extra_field5 },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.add_product,
+                              "extra_field5",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-md-6" }, [
+                    _c("p", { staticClass: "fw-600 text-center" }, [
+                      _vm._v("Approval Status")
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-md-4" }, [
+                        _c(
+                          "label",
+                          {
+                            staticClass:
+                              "control control-outline control--radio"
+                          },
+                          [
+                            _vm._v(
+                              "Pending\n                                        "
+                            ),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.add_product.approval_status,
+                                  expression: "add_product.approval_status"
+                                }
+                              ],
+                              attrs: {
+                                type: "radio",
+                                name: "Pending",
+                                value: "1"
+                              },
+                              domProps: {
+                                checked: _vm._q(
+                                  _vm.add_product.approval_status,
+                                  "1"
+                                )
+                              },
+                              on: {
+                                change: function($event) {
+                                  return _vm.$set(
+                                    _vm.add_product,
+                                    "approval_status",
+                                    "1"
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("span", { staticClass: "control__indicator" })
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-4" }, [
+                        _c(
+                          "label",
+                          {
+                            staticClass:
+                              "control control-outline control-outline-info control--radio"
+                          },
+                          [
+                            _vm._v(
+                              "Fail\n                                        "
+                            ),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.add_product.approval_status,
+                                  expression: "add_product.approval_status"
+                                }
+                              ],
+                              attrs: {
+                                type: "radio",
+                                name: "Fail",
+                                value: "2"
+                              },
+                              domProps: {
+                                checked: _vm._q(
+                                  _vm.add_product.approval_status,
+                                  "2"
+                                )
+                              },
+                              on: {
+                                change: function($event) {
+                                  return _vm.$set(
+                                    _vm.add_product,
+                                    "approval_status",
+                                    "2"
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("span", { staticClass: "control__indicator" })
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-4" }, [
+                        _c(
+                          "label",
+                          {
+                            staticClass:
+                              "control control-outline control-outline-success control--radio"
+                          },
+                          [
+                            _vm._v(
+                              "Success\n                                        "
+                            ),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.add_product.approval_status,
+                                  expression: "add_product.approval_status"
+                                }
+                              ],
+                              attrs: {
+                                type: "radio",
+                                name: "Success",
+                                value: "3"
+                              },
+                              domProps: {
+                                checked: _vm._q(
+                                  _vm.add_product.approval_status,
+                                  "3"
+                                )
+                              },
+                              on: {
+                                change: function($event) {
+                                  return _vm.$set(
+                                    _vm.add_product,
+                                    "approval_status",
+                                    "3"
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("span", { staticClass: "control__indicator" })
+                          ]
+                        )
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-6" }, [
+                    _c("p", { staticClass: "fw-600 text-center" }, [
+                      _vm._v("Shelf Status")
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-md-4" }, [
+                        _c(
+                          "label",
+                          {
+                            staticClass:
+                              "control control-outline control--radio"
+                          },
+                          [
+                            _vm._v(
+                              "OffShelf\n                                        "
+                            ),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.add_product.shelf_status,
+                                  expression: "add_product.shelf_status"
+                                }
+                              ],
+                              attrs: {
+                                type: "radio",
+                                name: "OffShelf",
+                                value: "1"
+                              },
+                              domProps: {
+                                checked: _vm._q(
+                                  _vm.add_product.shelf_status,
+                                  "1"
+                                )
+                              },
+                              on: {
+                                change: function($event) {
+                                  return _vm.$set(
+                                    _vm.add_product,
+                                    "shelf_status",
+                                    "1"
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("span", { staticClass: "control__indicator" })
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-4" }, [
+                        _c(
+                          "label",
+                          {
+                            staticClass:
+                              "control control-outline control-outline-info control--radio"
+                          },
+                          [
+                            _vm._v(
+                              "OnShelf\n                                        "
+                            ),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.add_product.shelf_status,
+                                  expression: "add_product.shelf_status"
+                                }
+                              ],
+                              attrs: {
+                                type: "radio",
+                                name: "OnShelf",
+                                value: "2"
+                              },
+                              domProps: {
+                                checked: _vm._q(
+                                  _vm.add_product.shelf_status,
+                                  "2"
+                                )
+                              },
+                              on: {
+                                change: function($event) {
+                                  return _vm.$set(
+                                    _vm.add_product,
+                                    "shelf_status",
+                                    "2"
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("span", { staticClass: "control__indicator" })
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-4" }, [
+                        _c(
+                          "label",
+                          {
+                            staticClass:
+                              "control control-outline control-outline-success control--radio"
+                          },
+                          [
+                            _vm._v(
+                              "Disabled\n                                        "
+                            ),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.add_product.shelf_status,
+                                  expression: "add_product.shelf_status"
+                                }
+                              ],
+                              attrs: {
+                                type: "radio",
+                                name: "Disabled",
+                                value: "3"
+                              },
+                              domProps: {
+                                checked: _vm._q(
+                                  _vm.add_product.shelf_status,
+                                  "3"
+                                )
+                              },
+                              on: {
+                                change: function($event) {
+                                  return _vm.$set(
+                                    _vm.add_product,
+                                    "shelf_status",
+                                    "3"
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("span", { staticClass: "control__indicator" })
+                          ]
+                        )
+                      ])
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "row mt-2" }, [
+                  _c("div", { staticClass: "col-md-12" }, [
+                    _c("p", { staticClass: "fw-600 text-center" }, [
+                      _vm._v("Product Type")
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-md-2" }, [
+                        _c(
+                          "label",
+                          {
+                            staticClass:
+                              "control control-outline control--radio"
+                          },
+                          [
+                            _vm._v(
+                              "Original\n                                        "
+                            ),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.add_product.product_type,
+                                  expression: "add_product.product_type"
+                                }
+                              ],
+                              attrs: {
+                                type: "radio",
+                                name: "Original",
+                                value: "1"
+                              },
+                              domProps: {
+                                checked: _vm._q(
+                                  _vm.add_product.product_type,
+                                  "1"
+                                )
+                              },
+                              on: {
+                                change: function($event) {
+                                  return _vm.$set(
+                                    _vm.add_product,
+                                    "product_type",
+                                    "1"
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("span", { staticClass: "control__indicator" })
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-2" }, [
+                        _c(
+                          "label",
+                          {
+                            staticClass:
+                              "control control-outline control-outline-info control--radio"
+                          },
+                          [
+                            _vm._v(
+                              "Crawl\n                                        "
+                            ),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.add_product.product_type,
+                                  expression: "add_product.product_type"
+                                }
+                              ],
+                              attrs: {
+                                type: "radio",
+                                name: "Crawl",
+                                value: "2"
+                              },
+                              domProps: {
+                                checked: _vm._q(
+                                  _vm.add_product.product_type,
+                                  "2"
+                                )
+                              },
+                              on: {
+                                change: function($event) {
+                                  return _vm.$set(
+                                    _vm.add_product,
+                                    "product_type",
+                                    "2"
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("span", { staticClass: "control__indicator" })
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-2" }, [
+                        _c(
+                          "label",
+                          {
+                            staticClass:
+                              "control control-outline control-outline-success control--radio"
+                          },
+                          [
+                            _vm._v(
+                              "Overseas\n                                        "
+                            ),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.add_product.product_type,
+                                  expression: "add_product.product_type"
+                                }
+                              ],
+                              attrs: {
+                                type: "radio",
+                                name: "Overseas",
+                                value: "3"
+                              },
+                              domProps: {
+                                checked: _vm._q(
+                                  _vm.add_product.product_type,
+                                  "3"
+                                )
+                              },
+                              on: {
+                                change: function($event) {
+                                  return _vm.$set(
+                                    _vm.add_product,
+                                    "product_type",
+                                    "3"
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("span", { staticClass: "control__indicator" })
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-2" }, [
+                        _c(
+                          "label",
+                          {
+                            staticClass:
+                              "control control-outline control-outline-success control--radio"
+                          },
+                          [
+                            _vm._v(
+                              "Important\n                                        "
+                            ),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.add_product.product_type,
+                                  expression: "add_product.product_type"
+                                }
+                              ],
+                              attrs: {
+                                type: "radio",
+                                name: "Important",
+                                value: "4"
+                              },
+                              domProps: {
+                                checked: _vm._q(
+                                  _vm.add_product.product_type,
+                                  "4"
+                                )
+                              },
+                              on: {
+                                change: function($event) {
+                                  return _vm.$set(
+                                    _vm.add_product,
+                                    "product_type",
+                                    "4"
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("span", { staticClass: "control__indicator" })
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-2" }, [
+                        _c(
+                          "label",
+                          {
+                            staticClass:
+                              "control control-outline control-outline-success control--radio"
+                          },
+                          [
+                            _vm._v(
+                              "Library\n                                        "
+                            ),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.add_product.product_type,
+                                  expression: "add_product.product_type"
+                                }
+                              ],
+                              attrs: {
+                                type: "radio",
+                                name: "Library",
+                                value: "5"
+                              },
+                              domProps: {
+                                checked: _vm._q(
+                                  _vm.add_product.product_type,
+                                  "5"
+                                )
+                              },
+                              on: {
+                                change: function($event) {
+                                  return _vm.$set(
+                                    _vm.add_product,
+                                    "product_type",
+                                    "5"
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("span", { staticClass: "control__indicator" })
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-2" }, [
+                        _c(
+                          "label",
+                          {
+                            staticClass:
+                              "control control-outline control-outline-success control--radio"
+                          },
+                          [
+                            _vm._v(
+                              "Others\n                                        "
+                            ),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.add_product.product_type,
+                                  expression: "add_product.product_type"
+                                }
+                              ],
+                              attrs: {
+                                type: "radio",
+                                name: "Others",
+                                value: "6"
+                              },
+                              domProps: {
+                                checked: _vm._q(
+                                  _vm.add_product.product_type,
+                                  "6"
+                                )
+                              },
+                              on: {
+                                change: function($event) {
+                                  return _vm.$set(
+                                    _vm.add_product,
+                                    "product_type",
+                                    "6"
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("span", { staticClass: "control__indicator" })
+                          ]
+                        )
+                      ])
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-footer" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-secondary",
+                      attrs: { type: "button", "data-dismiss": "modal" }
+                    },
+                    [_vm._v("Close")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary",
+                      attrs: { type: "button" },
+                      on: {
+                        click: function($event) {
+                          return _vm.submit_product()
+                        }
+                      }
+                    },
+                    [_vm._v("Add product")]
+                  )
+                ])
+              ])
+            ])
+          ]
+        )
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-2  mt-2 " }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-primary",
+          attrs: {
+            type: "button",
+            "data-toggle": "modal",
+            "data-target": "#exampleModal"
+          }
+        },
+        [_vm._v("\n            Add Products\n        ")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header" }, [
+      _c("div", { staticClass: "card-title" }, [
+        _vm._v(
+          "\n                                Ajax Data Tables\n                            "
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", { attrs: { role: "row" } }, [
+        _c(
+          "th",
+          {
+            staticClass: "sorting_asc",
+            staticStyle: { width: "144px" },
+            attrs: {
+              tabindex: "0",
+              "aria-controls": "ajax-datatable",
+              rowspan: "1",
+              colspan: "1",
+              "aria-label": "Name: activate to sort column descending",
+              "aria-sort": "ascending"
+            }
+          },
+          [_vm._v("Image")]
+        ),
+        _vm._v(" "),
+        _c(
+          "th",
+          {
+            staticClass: "sorting",
+            staticStyle: { width: "221px" },
+            attrs: {
+              tabindex: "0",
+              "aria-controls": "ajax-datatable",
+              rowspan: "1",
+              colspan: "1",
+              "aria-label": "Position: activate to sort column ascending"
+            }
+          },
+          [_vm._v("Title")]
+        ),
+        _vm._v(" "),
+        _c(
+          "th",
+          {
+            staticClass: "sorting",
+            staticStyle: { width: "105px" },
+            attrs: {
+              tabindex: "0",
+              "aria-controls": "ajax-datatable",
+              rowspan: "1",
+              colspan: "1",
+              "aria-label": "Office: activate to sort column ascending"
+            }
+          },
+          [_vm._v("Short Description")]
+        ),
+        _vm._v(" "),
+        _c(
+          "th",
+          {
+            staticClass: "sorting",
+            staticStyle: { width: "49px" },
+            attrs: {
+              tabindex: "0",
+              "aria-controls": "ajax-datatable",
+              rowspan: "1",
+              colspan: "1",
+              "aria-label": "Extn.: activate to sort column ascending"
+            }
+          },
+          [_vm._v("Created By.")]
+        ),
+        _vm._v(" "),
+        _c(
+          "th",
+          {
+            staticClass: "sorting",
+            staticStyle: { width: "93px" },
+            attrs: {
+              tabindex: "0",
+              "aria-controls": "ajax-datatable",
+              rowspan: "1",
+              colspan: "1",
+              "aria-label": "Start date: activate to sort column ascending"
+            }
+          },
+          [_vm._v("Action")]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tfoot", [
+      _c("tr", [
+        _c("th", { attrs: { rowspan: "1", colspan: "1" } }, [_vm._v("Image")]),
+        _vm._v(" "),
+        _c("th", { attrs: { rowspan: "1", colspan: "1" } }, [_vm._v("Title")]),
+        _vm._v(" "),
+        _c("th", { attrs: { rowspan: "1", colspan: "1" } }, [
+          _vm._v("Short Description")
+        ]),
+        _vm._v(" "),
+        _c("th", { attrs: { rowspan: "1", colspan: "1" } }, [
+          _vm._v("Created By.")
+        ]),
+        _vm._v(" "),
+        _c("th", { attrs: { rowspan: "1", colspan: "1" } }, [_vm._v("Action")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [
+      _c(
+        "a",
+        {
+          staticClass: "btn btn-info btn-icon btn-sm edit",
+          attrs: { href: "#" }
+        },
+        [_c("i", { staticClass: "fa fa-edit" })]
+      ),
+      _vm._v(" "),
+      _c(
+        "a",
+        {
+          staticClass: "btn btn-danger btn-icon btn-sm edit",
+          attrs: { href: "#" }
+        },
+        [_c("i", { staticClass: "fa fa-edit" })]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
+        [_vm._v("Modal title")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js":
 /*!********************************************************************!*\
   !*** ./node_modules/vue-loader/lib/runtime/componentNormalizer.js ***!
@@ -49684,6 +52236,7 @@ module.exports = function(module) {
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+Vue.component('view-products', __webpack_require__(/*! ./components/Products/view */ "./resources/js/components/Products/view.vue")["default"]);
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -49821,6 +52374,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/Products/view.vue":
+/*!***************************************************!*\
+  !*** ./resources/js/components/Products/view.vue ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _view_vue_vue_type_template_id_e27d47d6_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./view.vue?vue&type=template&id=e27d47d6&scoped=true& */ "./resources/js/components/Products/view.vue?vue&type=template&id=e27d47d6&scoped=true&");
+/* harmony import */ var _view_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./view.vue?vue&type=script&lang=js& */ "./resources/js/components/Products/view.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _view_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _view_vue_vue_type_template_id_e27d47d6_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _view_vue_vue_type_template_id_e27d47d6_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "e27d47d6",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Products/view.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Products/view.vue?vue&type=script&lang=js&":
+/*!****************************************************************************!*\
+  !*** ./resources/js/components/Products/view.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_view_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./view.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Products/view.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_view_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Products/view.vue?vue&type=template&id=e27d47d6&scoped=true&":
+/*!**********************************************************************************************!*\
+  !*** ./resources/js/components/Products/view.vue?vue&type=template&id=e27d47d6&scoped=true& ***!
+  \**********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_view_vue_vue_type_template_id_e27d47d6_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./view.vue?vue&type=template&id=e27d47d6&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Products/view.vue?vue&type=template&id=e27d47d6&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_view_vue_vue_type_template_id_e27d47d6_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_view_vue_vue_type_template_id_e27d47d6_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/sass/app.scss":
 /*!*********************************!*\
   !*** ./resources/sass/app.scss ***!
@@ -49839,8 +52461,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! E:\xampp\htdocs\user-product\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! E:\xampp\htdocs\user-product\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\user-product\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\user-product\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
