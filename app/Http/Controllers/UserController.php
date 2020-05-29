@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Product;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -13,7 +17,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        return view('Users.view');
     }
 
     /**
@@ -34,7 +38,35 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if (!empty($request->add_user['id'])) {
+            $user= User::find($request->add_user['id']);
+        } else {
+            $user=new User();
+        }
+        $user->assignRole($request->add_user['role']);
+        $user->name=$request->add_user['name'];
+        $user->username=$request->add_user['username'];
+        $user->role=$request->add_user['role'];
+        $user->status=$request->add_user['status'];
+        $user->email=$request->add_user['email'];
+        $user->password=Hash::make($request->add_user['password']);
+        $user->extra_field_1=$request->add_user['field1'];
+        $user->extra_field_2=$request->add_user['field2'];
+        $user->extra_field_3=$request->add_user['field3'];
+        $user->save();
+
+        $user=Auth::user();
+        $user_id=Auth::id();
+        if($user->hasRole('Admin')){
+            $data=User::all();
+        }
+        else{
+            $data=User::all();
+        }
+
+
+        return response()->json($data,200);
+
     }
 
     /**
@@ -43,9 +75,19 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        $user=Auth::user();
+        $user_id=Auth::id();
+        if($user->hasRole('Admin')){
+            $data=User::all();
+        }
+        else{
+            $data=User::all();
+        }
+
+
+        return response()->json($data,200);
     }
 
     /**
@@ -56,7 +98,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data=User::where('id',$id)->first();
+        return response()->json($data,200);
     }
 
     /**
@@ -79,6 +122,34 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        User::where('id',$id)->delete();
+
+        $user=Auth::user();
+        $user_id=Auth::id();
+        if($user->hasRole('Admin')){
+            $data=User::all();
+        }
+        elseif ($user->hasRole('Child User')){
+            $data=User::all();
+        }
+
+        return response()->json($data,200);
+    }
+
+    public function change_password()
+    {
+        return view('Users.change_password');
+    }
+    public function update_password(Request $request)
+    {
+        $password=$request->password;
+        $confirm_password=$request->confirm_password;
+        $user_id=$request->user['id'];
+
+        User::where('id',$user_id)->update([
+           'password'=>Hash::make($password),
+        ]);
+
+        return response()->json('success',200);
     }
 }

@@ -7,24 +7,24 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active" style="padding-left: 20px">
+            <li style="padding-left: 20px" class="{{ (request()->segment(1) === 'home') ? 'active' : '' }}">
 {{--                <a href="{{url('/home')}}" class="active">--}}
-                <a class="nav-link" href="{{url('/home')}}">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="{{url('/home')}}">Product <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item">
+          {{--  <li class="nav-item">
                 <a class="nav-link" href="">Add Product</a>
-            </li>
+            </li>--}}
 
             @can('users-page')
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <li  class="{{ (request()->segment(1) === 'users') ? 'active' : '' }}">
+                <a class="nav-link "  href="{{route('users.view')}}" >
                     Users
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+               {{-- <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="">All Users</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="">Add User</a>
-                </div>
+                </div>--}}
             </li>
             @endcan
         </ul>
@@ -47,7 +47,7 @@
                     </div>
 
 
-                    <a class="dropdown-item" href="{{ url('change-password') }}"><i class=" ti-lock"></i> Change Password</a>
+                    <a class="dropdown-item" href="{{route('change_password')}}"><i class=" ti-lock"></i> Change Password</a>
 
                     <div class="dropdown-divider"></div>
 
