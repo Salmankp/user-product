@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Faker\Provider\File;
 use App\Product;
+use App\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 
 class ProductController extends Controller
@@ -97,8 +99,15 @@ class ProductController extends Controller
             $images = $request->file('files');
             foreach ($images as $img)
             {
-                $filename='/images/'.$img->getClientOriginalName();
-                $img->move(public_path('images'),$filename);
+                $img->store('products', 's3');
+
+                $image = Image::create([
+                    'user_id' => $product->user_id,
+                    'product_id' => $product->id,
+                    'file_name' => basename($img),
+                    'image_url' => Storage::disk('s3')->url($img)
+                ]);
+
             }
         }
 

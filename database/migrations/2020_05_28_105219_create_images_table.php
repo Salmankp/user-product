@@ -22,6 +22,7 @@ class CreateImagesTable extends Migration
             $table->unsignedBigInteger('product_id')->nullable();
             $table->foreign('product_id')->references('id')->on('products');
 
+            $table->string('file_name')->nullable();
             $table->string('image_url')->nullable();
 
             $table->softDeletes();
