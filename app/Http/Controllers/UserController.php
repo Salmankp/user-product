@@ -48,6 +48,7 @@ class UserController extends Controller
         $user->username=$request->add_user['username'];
         $user->role=$request->add_user['role'];
         $user->status=$request->add_user['status'];
+        $user->created_by=Auth::id();
         $user->email=$request->add_user['email'];
         $user->password=Hash::make($request->add_user['password']);
         $user->extra_field_1=$request->add_user['field1'];
@@ -58,10 +59,10 @@ class UserController extends Controller
         $user=Auth::user();
         $user_id=Auth::id();
         if($user->hasRole('Admin')){
-            $data=User::all();
+            $data = User::where('id', '!=', auth()->user()->id)->get();
         }
         else{
-            $data=User::all();
+            $data = User::where('created_by', auth()->user()->id)->get();
         }
 
 
@@ -80,10 +81,10 @@ class UserController extends Controller
         $user=Auth::user();
         $user_id=Auth::id();
         if($user->hasRole('Admin')){
-            $data=User::all();
+            $data = User::where('id', '!=', auth()->user()->id)->get();
         }
         else{
-            $data=User::all();
+            $data = User::where('created_by', auth()->user()->id)->get();
         }
 
 
@@ -127,10 +128,10 @@ class UserController extends Controller
         $user=Auth::user();
         $user_id=Auth::id();
         if($user->hasRole('Admin')){
-            $data=User::all();
+            $data = User::where('id', '!=', auth()->user()->id)->get();
         }
         elseif ($user->hasRole('Child User')){
-            $data=User::all();
+            $data = User::where('created_by', auth()->user()->id)->get();
         }
 
         return response()->json($data,200);
