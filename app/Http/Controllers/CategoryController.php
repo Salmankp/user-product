@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\category;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class CategoryController extends Controller
 {
@@ -14,7 +17,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        return view('Category.view');
     }
 
     /**
@@ -35,7 +38,17 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if (!empty($request->add_category['id'])) {
+            $category= category::find($request->add_category['id']);
+        } else {
+            $category=new category();
+        }
+        $category->title=$request->add_category['name'];
+        $category->save();
+
+        $data = category::all();
+
+        return response()->json($data,200);
     }
 
     /**
@@ -46,7 +59,10 @@ class CategoryController extends Controller
      */
     public function show(category $category)
     {
-        //
+
+            $data = category::all();
+
+        return response()->json($data,200);
     }
 
     /**
@@ -55,9 +71,11 @@ class CategoryController extends Controller
      * @param  \App\category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit(category $category)
+    public function edit($id)
     {
-        //
+        $data=category::where('id',$id)->first();
+
+        return response()->json($data,200);
     }
 
     /**
@@ -78,8 +96,11 @@ class CategoryController extends Controller
      * @param  \App\category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(category $category)
+    public function destroy($id)
     {
-        //
+        category::where('id',$id)->delete();
+
+        $data = category::all();
+        return response()->json($data,200);
     }
 }

@@ -103,6 +103,20 @@ class UserController extends Controller
         return response()->json($data,200);
     }
 
+    public function all_users()
+    {
+        $user=Auth::user();
+        if($user->hasRole('Admin')){
+            $data = User::where('id', '!=', auth()->user()->id)->get();
+        }
+        elseif($user->hasRole('Master User')){
+            $data = User::where('created_by', auth()->user()->id)->get();
+        }
+
+        return response()->json($data,200);
+
+    }
+
     /**
      * Update the specified resource in storage.
      *

@@ -15,6 +15,43 @@
                                 <div class="card-title text-center">
                                     <b style="font-size:22px">Products Detail</b>
                                 </div>
+                                <div class="row mt-4 mb-4">
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-2">
+                                        <select class="form-control valid" aria-invalid="false" v-model="search_category">
+                                            <option value="" disabled selected>Select Category</option>
+                                            <option :value="data.id" selected v-for="data in category">
+                                                {{data.title}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2" v-if="user.role=='admin' || user.role=='Master User'">
+                                        <select class="form-control valid" aria-invalid="false" v-model="search_user">
+                                            <option value="" disabled selected>Select Users</option>
+                                            <option :value="data.id" selected v-for="data in users">
+                                                {{data.username}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <select class="form-control valid" aria-invalid="false" v-model="search_shelf">
+                                            <option value="" disabled selected>Select Shelf Status</option>
+                                            <option value="1">Off shelf</option>
+                                            <option value="2">On shelf</option>
+                                            <option value="3">Disabled</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <select class="form-control valid" aria-invalid="false" v-model="search_approval">
+                                            <option value="" disabled selected>Select Approval Status</option>
+                                            <option value="1">Pending</option>
+                                            <option value="2">Fail</option>
+                                            <option value="3">Success</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button @click="search" class="btn btn-info text-left">Search</button>
+                                        <button @click="reset_value()" class="btn btn-danger text-right">Reset</button>
+                                    </div>
+                                </div>
                             </div>
                             <div class="card-body">
                                 <div id="ajax-datatable_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
@@ -25,6 +62,7 @@
                                     <thead>
                                     <tr role="row">
                                         <th class="sorting_asc" tabindex="0" aria-controls="ajax-datatable" rowspan="1" colspan="1" aria-label="Name: activate to sort column descending" aria-sort="ascending" style="width: 144px;">Image</th>
+                                        <th class="sorting" tabindex="0" aria-controls="ajax-datatable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 221px;">Category Name</th>
                                         <th class="sorting" tabindex="0" aria-controls="ajax-datatable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 221px;">Title</th>
                                         <th class="sorting" tabindex="0" aria-controls="ajax-datatable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 105px;">Short Description</th>
                                         <th class="sorting" tabindex="0" aria-controls="ajax-datatable" rowspan="1" colspan="1" aria-label="Extn.: activate to sort column ascending" style="width: 49px;">Created By.</th>
@@ -33,18 +71,25 @@
                                     </thead>
                                     <tfoot>
                                     <tr><th rowspan="1" colspan="1">Image</th>
+                                        <th rowspan="1" colspan="1">Category Name</th>
                                         <th rowspan="1" colspan="1">Title</th>
                                         <th rowspan="1" colspan="1">Short Description</th>
-                                        <th rowspan="1" colspan="1">Created By.</th>
+                                        <th rowspan="1" colspan="1">Created By</th>
                                         <th rowspan="1" colspan="1" class="text-center">Action</th>
                                     </tr>
                                     </tfoot>
                                     <tbody>
                                     <tr role="row" class="odd" v-for="detail in data">
-                                        <td class="sorting_1">Airi Satou</td>
+                                        <td class="sorting_1" v-if="detail.product_image==null">
+                                            <p>No Image</p>
+                                        </td>
+                                        <td v-else>
+                                            <img :src="detail.product_image.image_url" alt="no image" width="50px" height="50px" >
+                                        </td>
+                                        <td>{{detail.category.title}}</td>
                                         <td>{{detail.title}}</td>
                                         <td>{{detail.short_description}}</td>
-                                        <td>{{user.name}}</td>
+                                        <td>{{detail.user.username}}</td>
                                         <td class="text-center"> <a href="#" title="Edit Product" class="btn btn-info btn-icon btn-sm edit" v-on:click="edit_product(detail.id)">
                                             <i class="fa fa-edit"  title="Edit"></i></a>
                                             <a href="#" v-on:click="delete_product(detail.id)" title="Delete Product" class="btn btn-danger btn-icon btn-sm delete">
@@ -97,8 +142,11 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Category</label>
-                                            <input type="text" class="form-control" aria-describedby="emailHelp"  v-model="add_product.category"
-                                                   placeholder="Enter Category">
+                                            <select class="form-control valid" aria-invalid="false" v-model="add_product.category">
+                                                <option value="" disabled selected>Select Category</option>
+                                                <option :value="data.id" selected v-for="data in category">
+                                                    {{data.title}}</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
@@ -426,6 +474,12 @@
         props:['user'],
         data() {
             return {
+                users:[],
+                search_category:'',
+                search_user:'',
+                search_shelf:'',
+                search_approval:'',
+                img_url:'',
                add_product:{
                   'id':'',
                  'title':'',
@@ -464,6 +518,7 @@
                 status:'',
                 images:[],
                 data:[],
+                category:[],
                 product_datatable:'',
             }
         },
@@ -472,6 +527,11 @@
         },
         mounted() {
             let self=this;
+            axios.get('/get/category', {
+            }).then((response) => {
+                this.category=response.data;
+            })
+
            /* setTimeout(function () {
                     jQuery.noConflict();
 
@@ -498,9 +558,58 @@
                     this.data=response.data;
             })
 
+            axios.get('/get/all/users', {
+            }).then((response) => {
+                    this.users=response.data;
+            });
         },
         methods:{
+            search()
+            {
+                let self=this;
+                if(this.search_approval=='' && this.search_shelf=='' && this.search_category=='' && this.search_user=='')
+                {
+                    return swal({
+                        title: "Search Field is Required",
+                        text: "Please Select Any Field ",
+                        icon: "warning",
+                    });
+                }
+                else {
+                    self.product_datatable.destroy();
 
+                    axios.post('/search/product', {
+                        category: this.search_category,
+                        shelf: this.search_shelf,
+                        approval: this.search_approval,
+                        user: this.search_user,
+                    }).then((response) => {
+                        $(document).ready(function () {
+                            self.product_datatable = $('#ajax-datatable').DataTable({
+                                language: {
+                                    search: "_INPUT_",
+                                    searchPlaceholder: "Search records",
+                                },
+                                "fnDrawCallback":function(){
+                                    $("input[type='search']").attr("id", "searchBox");
+                                    $('#searchBox').css("width", "200px");
+                                    $('.dataTables_filter').css("float", "right");
+                                }
+                            });
+                        });
+                        this.data = response.data;
+                    })
+                }
+            },
+
+            reset_value()
+            {
+              this.search_category='';
+              this.search_user='';
+              this.search_shelf='';
+              this.search_approval='';
+
+            },
             submit_product()
             {
                 let flag=true;
@@ -849,7 +958,7 @@
                         this.add_product.short_desc=response.data.short_description;
                         this.add_product.desc=response.data.description;
                         this.add_product.keyword=response.data.keywords;
-                        this.add_product.category=response.data.category;
+                        this.add_product.category=response.data.category_id;
                         this.add_product.trade_name=response.data.trade_name;
                         this.add_product.brand_name=response.data.brand_name;
                         this.add_product.internal_sku=response.data.internal_sku;

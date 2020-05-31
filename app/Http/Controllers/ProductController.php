@@ -23,14 +23,15 @@ class ProductController extends Controller
         $user=Auth::user();
         $user_id=Auth::id();
         if($user->hasRole('Admin')){
-            $data=Product::all();
+            $data=Product::with('product_image','user','category')->get();
         }
         elseif ($user->hasRole('Master User')){
             $child_users_id = User::where('created_by' , $user_id)->pluck('id');
-            $data=Product::whereIn('user_id',$child_users_id)->get();
+            $data=Product::with('product_image','user','category')->
+            whereIn('user_id',$child_users_id)->orWhere('user_id' , $user_id)->get();
         }
         elseif ($user->hasRole('Child User')){
-            $data=Product::where('user_id',$user_id)->get();
+            $data=Product::with('product_image','user','category')->where('user_id',$user_id)->get();
         }
 
         return response()->json($data,200);
@@ -65,7 +66,7 @@ class ProductController extends Controller
        $product->fill_time=$request->Fill_time;
        $product->brand_name=$request->brand_name;
        $product->buying_price=$request->buying_price;
-       $product->category=$request->category;
+       $product->category_id=$request->category;
        $product->description=$request->desc;
        $product->discount=$request->discount;
        $product->domestic_freight=$request->dom_freight;
@@ -116,14 +117,15 @@ class ProductController extends Controller
         $user=Auth::user();
         $user_id=Auth::id();
         if($user->hasRole('Admin')){
-            $data=Product::all();
+            $data=Product::with('product_image','user','category')->get();
         }
         elseif ($user->hasRole('Master User')){
             $child_users_id = User::where('created_by' , $user_id)->pluck('id');
-            $data=Product::whereIn('user_id',$child_users_id)->get();
+            $data=Product::with('product_image','user','category')->
+            whereIn('user_id',$child_users_id)->orWhere('user_id' , $user_id)->get();
         }
         elseif ($user->hasRole('Child User')){
-            $data=Product::where('user_id',$user_id)->get();
+            $data=Product::with('product_image','user','category')->where('user_id',$user_id)->get();
         }
 
         return response()->json($data,200);
@@ -179,18 +181,33 @@ class ProductController extends Controller
         $user=Auth::user();
         $user_id=Auth::id();
         if($user->hasRole('Admin')){
-            $data=Product::all();
+            $data=Product::with('product_image','user','category')->get();
         }
         elseif ($user->hasRole('Master User')){
             $child_users_id = User::where('created_by' , $user_id)->pluck('id');
-            $data=Product::whereIn('user_id',$child_users_id)->get();
+            $data=Product::with('product_image','user','category')->
+            whereIn('user_id',$child_users_id)->orWhere('user_id' , $user_id)->get();
         }
         elseif ($user->hasRole('Child User')){
-            $data=Product::where('user_id',$user_id)->get();
+            $data=Product::with('product_image','user','category')->where('user_id',$user_id)->get();
         }
 
         return response()->json($data,200);
 
 
+    }
+
+    public function search(Request $request)
+    {
+       $user_id=$request->user;
+       $category_id=$request->category;
+       $shelf=$request->shelf;
+       $approval=$request->approval;
+
+
+        $data=Product::with('product_image','user','category')->
+        orwhere('category_id',$category_id)->get();
+
+        return response()->json($data,200);
     }
 }

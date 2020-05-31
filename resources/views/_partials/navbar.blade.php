@@ -13,8 +13,8 @@
                 <a class="nav-link" href="{{url('/home')}}">Product <span class="sr-only">(current)</span></a>
             </li>
             @can('categories-page')
-            <li style="padding-left: 20px" class="{{ (request()->segment(1) === 'categories') ? 'active' : '' }}">
-                <a class="nav-link" href="{{url('/categories')}}">Categories <span class="sr-only">(current)</span></a>
+            <li style="padding-left: 20px" class="{{ (request()->segment(1) === 'category') ? 'active' : '' }}">
+                <a class="nav-link" href="{{route('categories.view')}}">Categories <span class="sr-only">(current)</span></a>
             </li>
             @endcan
 

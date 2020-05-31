@@ -8,6 +8,7 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 Vue.component('view-products', require('./components/Products/view').default);
+Vue.component('view-category', require('./components/Category/view').default);
 Vue.component('view-users', require('./components/Users/view').default);
 Vue.component('change-password', require('./components/Users/change_password').default);
 
