@@ -203,10 +203,22 @@ class ProductController extends Controller
        $category_id=$request->category;
        $shelf=$request->shelf;
        $approval=$request->approval;
+       $where=[];
 
+       if(!empty($user_id)) {
+           array_push($where,['user_id',$user_id]);
+       }
+        if(!empty($category_id)) {
+            array_push($where,['category_id',$category_id]);
+        }
+        if(!empty($shelf)) {
+            array_push($where,['shelf_status',$shelf]);
+        }
+        if(!empty($approval)) {
+            array_push($where,['approval_status',$approval]);
+        }
 
-        $data=Product::with('product_image','user','category')->
-        orwhere('category_id',$category_id)->get();
+        $data=Product::with('product_image','user','category')->where($where)->get();
 
         return response()->json($data,200);
     }
