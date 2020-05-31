@@ -19,6 +19,9 @@ class CreateProductsTable extends Migration
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
 
+            $table->unsignedBigInteger('category_id')->nullable();
+            $table->foreign('category_id')->references('id')->on('categories');
+
             $table->string('title')->nullable();
             $table->string('sku')->nullable();
             $table->longText('description')->nullable();

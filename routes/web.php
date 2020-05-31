@@ -33,6 +33,10 @@ Route::group(['middleware' => 'auth'] , function () {
         Route::get('/edit/user/{id}', 'UserController@edit')->name('user.destroy');
     });
 
+    Route::group(['middleware' => ['permission:categories-page']] , function () {
+
+    });
+
     Route::get('/change/password', 'UserController@change_password')->name('change_password');
     Route::Post('/update/password', 'UserController@update_password')->name('update_password');
 

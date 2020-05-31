@@ -7,13 +7,16 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
+
             <li style="padding-left: 20px" class="{{ (request()->segment(1) === 'home') ? 'active' : '' }}">
 {{--                <a href="{{url('/home')}}" class="active">--}}
                 <a class="nav-link" href="{{url('/home')}}">Product <span class="sr-only">(current)</span></a>
             </li>
-          {{--  <li class="nav-item">
-                <a class="nav-link" href="">Add Product</a>
-            </li>--}}
+            @can('categories-page')
+            <li style="padding-left: 20px" class="{{ (request()->segment(1) === 'categories') ? 'active' : '' }}">
+                <a class="nav-link" href="{{url('/categories')}}">Categories <span class="sr-only">(current)</span></a>
+            </li>
+            @endcan
 
             @can('users-page')
             <li  class="{{ (request()->segment(1) === 'users') ? 'active' : '' }}">
