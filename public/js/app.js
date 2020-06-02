@@ -2656,6 +2656,114 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "view.vue",
   props: ['user'],
@@ -2663,9 +2771,11 @@ __webpack_require__.r(__webpack_exports__);
     return {
       users: [],
       search_category: '',
+      search_internal_sku: '',
       search_user: '',
       search_shelf: '',
       search_approval: '',
+      search_product_type: '',
       img_url: '',
       add_product: {
         'id': '',
@@ -2750,7 +2860,7 @@ __webpack_require__.r(__webpack_exports__);
 
       var self = this;
 
-      if (this.search_approval == '' && this.search_shelf == '' && this.search_category == '' && this.search_user == '') {
+      if (this.search_approval == '' && this.search_shelf == '' && this.search_category == '' && this.search_user == '' && this.search_internal_sku == '' && this.search_product_type == '') {
         return swal({
           title: "Search Field is Required",
           text: "Please Select Any Field ",
@@ -40390,6 +40500,63 @@ var render = function() {
                   )
                 ]),
                 _vm._v(" "),
+                _c("div", { staticClass: "col-md-2" }, [
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.search_internal_sku,
+                          expression: "search_internal_sku"
+                        }
+                      ],
+                      staticClass: "form-control valid",
+                      attrs: { "aria-invalid": "false" },
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.search_internal_sku = $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        }
+                      }
+                    },
+                    [
+                      _c(
+                        "option",
+                        { attrs: { value: "", disabled: "", selected: "" } },
+                        [_vm._v("Select Internal Sku")]
+                      ),
+                      _vm._v(" "),
+                      _vm._l(_vm.data, function(detail) {
+                        return _c(
+                          "option",
+                          {
+                            attrs: { selected: "" },
+                            domProps: { value: _vm.data.internal_sku }
+                          },
+                          [
+                            _vm._v(
+                              "\n                                            " +
+                                _vm._s(_vm.data.internal_sku)
+                            )
+                          ]
+                        )
+                      })
+                    ],
+                    2
+                  )
+                ]),
+                _vm._v(" "),
                 _vm.user.role == "admin" || _vm.user.role == "Master User"
                   ? _c("div", { staticClass: "col-md-2" }, [
                       _c(
@@ -40449,7 +40616,11 @@ var render = function() {
                         2
                       )
                     ])
-                  : _vm._e(),
+                  : _vm._e()
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "row mt-4 mb-4" }, [
+                _c("div", { staticClass: "col-md-2" }),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-md-2" }, [
                   _c(
@@ -40555,6 +40726,68 @@ var render = function() {
                 _vm._v(" "),
                 _c("div", { staticClass: "col-md-2" }, [
                   _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.search_product_type,
+                          expression: "search_product_type"
+                        }
+                      ],
+                      staticClass: "form-control valid",
+                      attrs: { "aria-invalid": "false" },
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.search_product_type = $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        }
+                      }
+                    },
+                    [
+                      _c(
+                        "option",
+                        { attrs: { value: "", disabled: "", selected: "" } },
+                        [_vm._v("Product Type")]
+                      ),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "1" } }, [
+                        _vm._v("Original")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "2" } }, [
+                        _vm._v("Crawl")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "3" } }, [
+                        _vm._v("Overseas")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "4" } }, [
+                        _vm._v("Important")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "5" } }, [
+                        _vm._v("Library")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "6" } }, [_vm._v("other")])
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-2" }, [
+                  _c(
                     "button",
                     {
                       staticClass: "btn btn-info text-left",
@@ -40576,7 +40809,13 @@ var render = function() {
                     [_vm._v("Reset")]
                   )
                 ])
-              ])
+              ]),
+              _vm._v(" "),
+              _vm._m(1),
+              _vm._v(" "),
+              _vm._m(2),
+              _vm._v(" "),
+              _vm._m(3)
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "card-body" }, [
@@ -40603,9 +40842,9 @@ var render = function() {
                           }
                         },
                         [
-                          _vm._m(1),
+                          _vm._m(4),
                           _vm._v(" "),
-                          _vm._m(2),
+                          _vm._m(5),
                           _vm._v(" "),
                           _c(
                             "tbody",
@@ -40636,12 +40875,66 @@ var render = function() {
                                   _c("td", [_vm._v(_vm._s(detail.title))]),
                                   _vm._v(" "),
                                   _c("td", [
-                                    _vm._v(_vm._s(detail.short_description))
+                                    _vm._v(_vm._s(detail.internal_sku))
+                                  ]),
+                                  _vm._v(" "),
+                                  detail.product_type == 1
+                                    ? _c("td", [
+                                        _vm._v(
+                                          "\n                                      original\n                                    "
+                                        )
+                                      ])
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  detail.product_type == 2
+                                    ? _c("td", [
+                                        _vm._v(
+                                          "\n                                       crawl\n                                    "
+                                        )
+                                      ])
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  detail.product_type == 3
+                                    ? _c("td", [
+                                        _vm._v(
+                                          "\n                                        overseas\n                                    "
+                                        )
+                                      ])
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  detail.product_type == 4
+                                    ? _c("td", [
+                                        _vm._v(
+                                          "\n                                        important\n                                    "
+                                        )
+                                      ])
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  detail.product_type == 5
+                                    ? _c("td", [
+                                        _vm._v(
+                                          "\n                                      library\n                                    "
+                                        )
+                                      ])
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  detail.product_type == 6
+                                    ? _c("td", [
+                                        _vm._v(
+                                          "\n                                       other\n                                    "
+                                        )
+                                      ])
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  _c("td", [
+                                    _vm._v(_vm._s(detail.buying_price))
                                   ]),
                                   _vm._v(" "),
                                   _c("td", [
                                     _vm._v(_vm._s(detail.user.username))
                                   ]),
+                                  _vm._v(" "),
+                                  _c("td", [_vm._v(_vm._s(detail.created_at))]),
                                   _vm._v(" "),
                                   _c("td", { staticClass: "text-center" }, [
                                     _c(
@@ -40738,7 +41031,7 @@ var render = function() {
                         _vm._v("Update Product")
                       ]),
                   _vm._v(" "),
-                  _vm._m(3)
+                  _vm._m(6)
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "modal-body" }, [
@@ -41892,599 +42185,632 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "row mt-2" }, [
-                    _c("div", { staticClass: "col-md-12" }, [
-                      _c("p", { staticClass: "fw-600 text-center" }, [
-                        _vm._v("Approval Status")
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "row" }, [
-                        _c("div", { staticClass: "col-md-4" }, [
-                          _c(
-                            "label",
-                            {
-                              staticClass:
-                                "control control-outline control--radio"
-                            },
-                            [
-                              _vm._v(
-                                "Pending\n                                                "
-                              ),
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.add_product.approval_status,
-                                    expression: "add_product.approval_status"
-                                  }
-                                ],
-                                attrs: {
-                                  type: "radio",
-                                  name: "Pending",
-                                  value: "1"
+                    _c("div", { staticClass: "col-6" }, [
+                      _c("div", { staticClass: "row mt-2" }, [
+                        _c("div", { staticClass: "col-md-12" }, [
+                          _c("p", { staticClass: "fw-600 text-center" }, [
+                            _vm._v("Approval Status")
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "row" }, [
+                            _c("div", { staticClass: "col-md-4" }, [
+                              _c(
+                                "label",
+                                {
+                                  staticClass:
+                                    "control control-outline control--radio"
                                 },
-                                domProps: {
-                                  checked: _vm._q(
-                                    _vm.add_product.approval_status,
-                                    "1"
-                                  )
+                                [
+                                  _vm._v(
+                                    "Pending\n                                                "
+                                  ),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.add_product.approval_status,
+                                        expression:
+                                          "add_product.approval_status"
+                                      }
+                                    ],
+                                    attrs: {
+                                      type: "radio",
+                                      name: "Pending",
+                                      value: "1"
+                                    },
+                                    domProps: {
+                                      checked: _vm._q(
+                                        _vm.add_product.approval_status,
+                                        "1"
+                                      )
+                                    },
+                                    on: {
+                                      change: function($event) {
+                                        return _vm.$set(
+                                          _vm.add_product,
+                                          "approval_status",
+                                          "1"
+                                        )
+                                      }
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("span", {
+                                    staticClass: "control__indicator"
+                                  })
+                                ]
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-md-4" }, [
+                              _c(
+                                "label",
+                                {
+                                  staticClass:
+                                    "control control-outline control-outline-info control--radio"
                                 },
-                                on: {
-                                  change: function($event) {
-                                    return _vm.$set(
-                                      _vm.add_product,
-                                      "approval_status",
-                                      "1"
-                                    )
-                                  }
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("span", { staticClass: "control__indicator" })
-                            ]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "col-md-4" }, [
-                          _c(
-                            "label",
-                            {
-                              staticClass:
-                                "control control-outline control-outline-info control--radio"
-                            },
-                            [
-                              _vm._v(
-                                "Fail\n                                                "
-                              ),
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.add_product.approval_status,
-                                    expression: "add_product.approval_status"
-                                  }
-                                ],
-                                attrs: {
-                                  type: "radio",
-                                  name: "Fail",
-                                  value: "2"
+                                [
+                                  _vm._v(
+                                    "Fail\n                                                "
+                                  ),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.add_product.approval_status,
+                                        expression:
+                                          "add_product.approval_status"
+                                      }
+                                    ],
+                                    attrs: {
+                                      type: "radio",
+                                      name: "Fail",
+                                      value: "2"
+                                    },
+                                    domProps: {
+                                      checked: _vm._q(
+                                        _vm.add_product.approval_status,
+                                        "2"
+                                      )
+                                    },
+                                    on: {
+                                      change: function($event) {
+                                        return _vm.$set(
+                                          _vm.add_product,
+                                          "approval_status",
+                                          "2"
+                                        )
+                                      }
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("span", {
+                                    staticClass: "control__indicator"
+                                  })
+                                ]
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-md-4" }, [
+                              _c(
+                                "label",
+                                {
+                                  staticClass:
+                                    "control control-outline control-outline-success control--radio"
                                 },
-                                domProps: {
-                                  checked: _vm._q(
-                                    _vm.add_product.approval_status,
-                                    "2"
-                                  )
-                                },
-                                on: {
-                                  change: function($event) {
-                                    return _vm.$set(
-                                      _vm.add_product,
-                                      "approval_status",
-                                      "2"
-                                    )
-                                  }
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("span", { staticClass: "control__indicator" })
-                            ]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "col-md-4" }, [
-                          _c(
-                            "label",
-                            {
-                              staticClass:
-                                "control control-outline control-outline-success control--radio"
-                            },
-                            [
-                              _vm._v(
-                                "Success\n                                                "
-                              ),
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.add_product.approval_status,
-                                    expression: "add_product.approval_status"
-                                  }
-                                ],
-                                attrs: {
-                                  type: "radio",
-                                  name: "Success",
-                                  value: "3"
-                                },
-                                domProps: {
-                                  checked: _vm._q(
-                                    _vm.add_product.approval_status,
-                                    "3"
-                                  )
-                                },
-                                on: {
-                                  change: function($event) {
-                                    return _vm.$set(
-                                      _vm.add_product,
-                                      "approval_status",
-                                      "3"
-                                    )
-                                  }
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("span", { staticClass: "control__indicator" })
-                            ]
-                          )
-                        ])
-                      ])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "row mt-2" }, [
-                    _c("div", { staticClass: "col-md-12" }, [
-                      _c("p", { staticClass: "fw-600 text-center" }, [
-                        _vm._v("Shelf Status")
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "row" }, [
-                        _c("div", { staticClass: "col-md-4" }, [
-                          _c(
-                            "label",
-                            {
-                              staticClass:
-                                "control control-outline control--radio"
-                            },
-                            [
-                              _vm._v(
-                                "Off-Shelf\n                                                "
-                              ),
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.add_product.shelf_status,
-                                    expression: "add_product.shelf_status"
-                                  }
-                                ],
-                                attrs: {
-                                  type: "radio",
-                                  name: "OffShelf",
-                                  value: "1"
-                                },
-                                domProps: {
-                                  checked: _vm._q(
-                                    _vm.add_product.shelf_status,
-                                    "1"
-                                  )
-                                },
-                                on: {
-                                  change: function($event) {
-                                    return _vm.$set(
-                                      _vm.add_product,
-                                      "shelf_status",
-                                      "1"
-                                    )
-                                  }
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("span", { staticClass: "control__indicator" })
-                            ]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "col-md-4" }, [
-                          _c(
-                            "label",
-                            {
-                              staticClass:
-                                "control control-outline control-outline-info control--radio"
-                            },
-                            [
-                              _vm._v(
-                                "OnShelf\n                                                "
-                              ),
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.add_product.shelf_status,
-                                    expression: "add_product.shelf_status"
-                                  }
-                                ],
-                                attrs: {
-                                  type: "radio",
-                                  name: "OnShelf",
-                                  value: "2"
-                                },
-                                domProps: {
-                                  checked: _vm._q(
-                                    _vm.add_product.shelf_status,
-                                    "2"
-                                  )
-                                },
-                                on: {
-                                  change: function($event) {
-                                    return _vm.$set(
-                                      _vm.add_product,
-                                      "shelf_status",
-                                      "2"
-                                    )
-                                  }
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("span", { staticClass: "control__indicator" })
-                            ]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "col-md-4" }, [
-                          _c(
-                            "label",
-                            {
-                              staticClass:
-                                "control control-outline control-outline-success control--radio"
-                            },
-                            [
-                              _vm._v(
-                                "Disabled\n                                                "
-                              ),
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.add_product.shelf_status,
-                                    expression: "add_product.shelf_status"
-                                  }
-                                ],
-                                attrs: {
-                                  type: "radio",
-                                  name: "Disabled",
-                                  value: "3"
-                                },
-                                domProps: {
-                                  checked: _vm._q(
-                                    _vm.add_product.shelf_status,
-                                    "3"
-                                  )
-                                },
-                                on: {
-                                  change: function($event) {
-                                    return _vm.$set(
-                                      _vm.add_product,
-                                      "shelf_status",
-                                      "3"
-                                    )
-                                  }
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("span", { staticClass: "control__indicator" })
-                            ]
-                          )
-                        ])
-                      ])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "row mt-2" }, [
-                    _c("div", { staticClass: "col-md-12" }, [
-                      _c("p", { staticClass: "fw-600 text-center" }, [
-                        _vm._v("Product Type")
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "row" }, [
-                        _c("div", { staticClass: "col-md-2" }, [
-                          _c(
-                            "label",
-                            {
-                              staticClass:
-                                "control control-outline control--radio"
-                            },
-                            [
-                              _vm._v(
-                                "Original\n                                                "
-                              ),
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.add_product.product_type,
-                                    expression: "add_product.product_type"
-                                  }
-                                ],
-                                attrs: {
-                                  type: "radio",
-                                  name: "Original",
-                                  value: "1"
-                                },
-                                domProps: {
-                                  checked: _vm._q(
-                                    _vm.add_product.product_type,
-                                    "1"
-                                  )
-                                },
-                                on: {
-                                  change: function($event) {
-                                    return _vm.$set(
-                                      _vm.add_product,
-                                      "product_type",
-                                      "1"
-                                    )
-                                  }
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("span", { staticClass: "control__indicator" })
-                            ]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "col-md-2" }, [
-                          _c(
-                            "label",
-                            {
-                              staticClass:
-                                "control control-outline control-outline-info control--radio"
-                            },
-                            [
-                              _vm._v(
-                                "Crawl\n                                                "
-                              ),
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.add_product.product_type,
-                                    expression: "add_product.product_type"
-                                  }
-                                ],
-                                attrs: {
-                                  type: "radio",
-                                  name: "Crawl",
-                                  value: "2"
-                                },
-                                domProps: {
-                                  checked: _vm._q(
-                                    _vm.add_product.product_type,
-                                    "2"
-                                  )
-                                },
-                                on: {
-                                  change: function($event) {
-                                    return _vm.$set(
-                                      _vm.add_product,
-                                      "product_type",
-                                      "2"
-                                    )
-                                  }
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("span", { staticClass: "control__indicator" })
-                            ]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "col-md-2" }, [
-                          _c(
-                            "label",
-                            {
-                              staticClass:
-                                "control control-outline control-outline-success control--radio"
-                            },
-                            [
-                              _vm._v(
-                                "Overseas\n                                                "
-                              ),
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.add_product.product_type,
-                                    expression: "add_product.product_type"
-                                  }
-                                ],
-                                attrs: {
-                                  type: "radio",
-                                  name: "Overseas",
-                                  value: "3"
-                                },
-                                domProps: {
-                                  checked: _vm._q(
-                                    _vm.add_product.product_type,
-                                    "3"
-                                  )
-                                },
-                                on: {
-                                  change: function($event) {
-                                    return _vm.$set(
-                                      _vm.add_product,
-                                      "product_type",
-                                      "3"
-                                    )
-                                  }
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("span", { staticClass: "control__indicator" })
-                            ]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "col-md-2" }, [
-                          _c(
-                            "label",
-                            {
-                              staticClass:
-                                "control control-outline control-outline-success control--radio"
-                            },
-                            [
-                              _vm._v(
-                                "Important\n                                                "
-                              ),
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.add_product.product_type,
-                                    expression: "add_product.product_type"
-                                  }
-                                ],
-                                attrs: {
-                                  type: "radio",
-                                  name: "Important",
-                                  value: "4"
-                                },
-                                domProps: {
-                                  checked: _vm._q(
-                                    _vm.add_product.product_type,
-                                    "4"
-                                  )
-                                },
-                                on: {
-                                  change: function($event) {
-                                    return _vm.$set(
-                                      _vm.add_product,
-                                      "product_type",
-                                      "4"
-                                    )
-                                  }
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("span", { staticClass: "control__indicator" })
-                            ]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "col-md-2" }, [
-                          _c(
-                            "label",
-                            {
-                              staticClass:
-                                "control control-outline control-outline-success control--radio"
-                            },
-                            [
-                              _vm._v(
-                                "Library\n                                                "
-                              ),
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.add_product.product_type,
-                                    expression: "add_product.product_type"
-                                  }
-                                ],
-                                attrs: {
-                                  type: "radio",
-                                  name: "Library",
-                                  value: "5"
-                                },
-                                domProps: {
-                                  checked: _vm._q(
-                                    _vm.add_product.product_type,
-                                    "5"
-                                  )
-                                },
-                                on: {
-                                  change: function($event) {
-                                    return _vm.$set(
-                                      _vm.add_product,
-                                      "product_type",
-                                      "5"
-                                    )
-                                  }
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("span", { staticClass: "control__indicator" })
-                            ]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "col-md-2" }, [
-                          _c(
-                            "label",
-                            {
-                              staticClass:
-                                "control control-outline control-outline-success control--radio"
-                            },
-                            [
-                              _vm._v(
-                                "Others\n                                                "
-                              ),
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.add_product.product_type,
-                                    expression: "add_product.product_type"
-                                  }
-                                ],
-                                attrs: {
-                                  type: "radio",
-                                  name: "Others",
-                                  value: "6"
-                                },
-                                domProps: {
-                                  checked: _vm._q(
-                                    _vm.add_product.product_type,
-                                    "6"
-                                  )
-                                },
-                                on: {
-                                  change: function($event) {
-                                    return _vm.$set(
-                                      _vm.add_product,
-                                      "product_type",
-                                      "6"
-                                    )
-                                  }
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("span", { staticClass: "control__indicator" })
-                            ]
-                          )
+                                [
+                                  _vm._v(
+                                    "Success\n                                                "
+                                  ),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.add_product.approval_status,
+                                        expression:
+                                          "add_product.approval_status"
+                                      }
+                                    ],
+                                    attrs: {
+                                      type: "radio",
+                                      name: "Success",
+                                      value: "3"
+                                    },
+                                    domProps: {
+                                      checked: _vm._q(
+                                        _vm.add_product.approval_status,
+                                        "3"
+                                      )
+                                    },
+                                    on: {
+                                      change: function($event) {
+                                        return _vm.$set(
+                                          _vm.add_product,
+                                          "approval_status",
+                                          "3"
+                                        )
+                                      }
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("span", {
+                                    staticClass: "control__indicator"
+                                  })
+                                ]
+                              )
+                            ])
+                          ])
                         ])
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "row mt-2" }, [
-                        _vm._m(4),
+                        _c("div", { staticClass: "col-md-12" }, [
+                          _c("p", { staticClass: "fw-600 text-center" }, [
+                            _vm._v("Shelf Status")
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "row" }, [
+                            _c("div", { staticClass: "col-md-4" }, [
+                              _c(
+                                "label",
+                                {
+                                  staticClass:
+                                    "control control-outline control--radio"
+                                },
+                                [
+                                  _vm._v(
+                                    "Off-Shelf\n                                                "
+                                  ),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.add_product.shelf_status,
+                                        expression: "add_product.shelf_status"
+                                      }
+                                    ],
+                                    attrs: {
+                                      type: "radio",
+                                      name: "OffShelf",
+                                      value: "1"
+                                    },
+                                    domProps: {
+                                      checked: _vm._q(
+                                        _vm.add_product.shelf_status,
+                                        "1"
+                                      )
+                                    },
+                                    on: {
+                                      change: function($event) {
+                                        return _vm.$set(
+                                          _vm.add_product,
+                                          "shelf_status",
+                                          "1"
+                                        )
+                                      }
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("span", {
+                                    staticClass: "control__indicator"
+                                  })
+                                ]
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-md-4" }, [
+                              _c(
+                                "label",
+                                {
+                                  staticClass:
+                                    "control control-outline control-outline-info control--radio"
+                                },
+                                [
+                                  _vm._v(
+                                    "OnShelf\n                                                "
+                                  ),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.add_product.shelf_status,
+                                        expression: "add_product.shelf_status"
+                                      }
+                                    ],
+                                    attrs: {
+                                      type: "radio",
+                                      name: "OnShelf",
+                                      value: "2"
+                                    },
+                                    domProps: {
+                                      checked: _vm._q(
+                                        _vm.add_product.shelf_status,
+                                        "2"
+                                      )
+                                    },
+                                    on: {
+                                      change: function($event) {
+                                        return _vm.$set(
+                                          _vm.add_product,
+                                          "shelf_status",
+                                          "2"
+                                        )
+                                      }
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("span", {
+                                    staticClass: "control__indicator"
+                                  })
+                                ]
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-md-4" }, [
+                              _c(
+                                "label",
+                                {
+                                  staticClass:
+                                    "control control-outline control-outline-success control--radio"
+                                },
+                                [
+                                  _vm._v(
+                                    "Disabled\n                                                "
+                                  ),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.add_product.shelf_status,
+                                        expression: "add_product.shelf_status"
+                                      }
+                                    ],
+                                    attrs: {
+                                      type: "radio",
+                                      name: "Disabled",
+                                      value: "3"
+                                    },
+                                    domProps: {
+                                      checked: _vm._q(
+                                        _vm.add_product.shelf_status,
+                                        "3"
+                                      )
+                                    },
+                                    on: {
+                                      change: function($event) {
+                                        return _vm.$set(
+                                          _vm.add_product,
+                                          "shelf_status",
+                                          "3"
+                                        )
+                                      }
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("span", {
+                                    staticClass: "control__indicator"
+                                  })
+                                ]
+                              )
+                            ])
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "row mt-2" }, [
+                        _c("div", { staticClass: "col-md-12" }, [
+                          _c("p", { staticClass: "fw-600 text-center" }, [
+                            _vm._v("Product Type")
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "row" }, [
+                            _c("div", { staticClass: "col-md-2" }, [
+                              _c(
+                                "label",
+                                {
+                                  staticClass:
+                                    "control control-outline control--radio"
+                                },
+                                [
+                                  _vm._v(
+                                    "Original\n                                                "
+                                  ),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.add_product.product_type,
+                                        expression: "add_product.product_type"
+                                      }
+                                    ],
+                                    attrs: {
+                                      type: "radio",
+                                      name: "Original",
+                                      value: "1"
+                                    },
+                                    domProps: {
+                                      checked: _vm._q(
+                                        _vm.add_product.product_type,
+                                        "1"
+                                      )
+                                    },
+                                    on: {
+                                      change: function($event) {
+                                        return _vm.$set(
+                                          _vm.add_product,
+                                          "product_type",
+                                          "1"
+                                        )
+                                      }
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("span", {
+                                    staticClass: "control__indicator"
+                                  })
+                                ]
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-md-2" }, [
+                              _c(
+                                "label",
+                                {
+                                  staticClass:
+                                    "control control-outline control-outline-info control--radio"
+                                },
+                                [
+                                  _vm._v(
+                                    "Crawl\n                                                "
+                                  ),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.add_product.product_type,
+                                        expression: "add_product.product_type"
+                                      }
+                                    ],
+                                    attrs: {
+                                      type: "radio",
+                                      name: "Crawl",
+                                      value: "2"
+                                    },
+                                    domProps: {
+                                      checked: _vm._q(
+                                        _vm.add_product.product_type,
+                                        "2"
+                                      )
+                                    },
+                                    on: {
+                                      change: function($event) {
+                                        return _vm.$set(
+                                          _vm.add_product,
+                                          "product_type",
+                                          "2"
+                                        )
+                                      }
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("span", {
+                                    staticClass: "control__indicator"
+                                  })
+                                ]
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-md-2" }, [
+                              _c(
+                                "label",
+                                {
+                                  staticClass:
+                                    "control control-outline control-outline-success control--radio"
+                                },
+                                [
+                                  _vm._v(
+                                    "Overseas\n                                                "
+                                  ),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.add_product.product_type,
+                                        expression: "add_product.product_type"
+                                      }
+                                    ],
+                                    attrs: {
+                                      type: "radio",
+                                      name: "Overseas",
+                                      value: "3"
+                                    },
+                                    domProps: {
+                                      checked: _vm._q(
+                                        _vm.add_product.product_type,
+                                        "3"
+                                      )
+                                    },
+                                    on: {
+                                      change: function($event) {
+                                        return _vm.$set(
+                                          _vm.add_product,
+                                          "product_type",
+                                          "3"
+                                        )
+                                      }
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("span", {
+                                    staticClass: "control__indicator"
+                                  })
+                                ]
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-md-2" }, [
+                              _c(
+                                "label",
+                                {
+                                  staticClass:
+                                    "control control-outline control-outline-success control--radio"
+                                },
+                                [
+                                  _vm._v(
+                                    "Important\n                                                "
+                                  ),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.add_product.product_type,
+                                        expression: "add_product.product_type"
+                                      }
+                                    ],
+                                    attrs: {
+                                      type: "radio",
+                                      name: "Important",
+                                      value: "4"
+                                    },
+                                    domProps: {
+                                      checked: _vm._q(
+                                        _vm.add_product.product_type,
+                                        "4"
+                                      )
+                                    },
+                                    on: {
+                                      change: function($event) {
+                                        return _vm.$set(
+                                          _vm.add_product,
+                                          "product_type",
+                                          "4"
+                                        )
+                                      }
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("span", {
+                                    staticClass: "control__indicator"
+                                  })
+                                ]
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-md-2" }, [
+                              _c(
+                                "label",
+                                {
+                                  staticClass:
+                                    "control control-outline control-outline-success control--radio"
+                                },
+                                [
+                                  _vm._v(
+                                    "Library\n                                                "
+                                  ),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.add_product.product_type,
+                                        expression: "add_product.product_type"
+                                      }
+                                    ],
+                                    attrs: {
+                                      type: "radio",
+                                      name: "Library",
+                                      value: "5"
+                                    },
+                                    domProps: {
+                                      checked: _vm._q(
+                                        _vm.add_product.product_type,
+                                        "5"
+                                      )
+                                    },
+                                    on: {
+                                      change: function($event) {
+                                        return _vm.$set(
+                                          _vm.add_product,
+                                          "product_type",
+                                          "5"
+                                        )
+                                      }
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("span", {
+                                    staticClass: "control__indicator"
+                                  })
+                                ]
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-md-2" }, [
+                              _c(
+                                "label",
+                                {
+                                  staticClass:
+                                    "control control-outline control-outline-success control--radio"
+                                },
+                                [
+                                  _vm._v(
+                                    "Others\n                                                "
+                                  ),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.add_product.product_type,
+                                        expression: "add_product.product_type"
+                                      }
+                                    ],
+                                    attrs: {
+                                      type: "radio",
+                                      name: "Others",
+                                      value: "6"
+                                    },
+                                    domProps: {
+                                      checked: _vm._q(
+                                        _vm.add_product.product_type,
+                                        "6"
+                                      )
+                                    },
+                                    on: {
+                                      change: function($event) {
+                                        return _vm.$set(
+                                          _vm.add_product,
+                                          "product_type",
+                                          "6"
+                                        )
+                                      }
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("span", {
+                                    staticClass: "control__indicator"
+                                  })
+                                ]
+                              )
+                            ])
+                          ])
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-6" }, [
+                      _c("div", { staticClass: "row mt-2" }, [
+                        _vm._m(7),
                         _vm._v(" "),
                         _c("div", { staticClass: "col-md-12" }, [
                           _c("input", {
@@ -42576,6 +42902,102 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row mt-4 mb-4" }, [
+      _c("div", { staticClass: "col-2" }),
+      _vm._v(" "),
+      _c("h6", [_vm._v("Approval status")]),
+      _vm._v(
+        "\n                                   \n                                "
+      ),
+      _c("button", { staticClass: "btn btn-primary btn-sm" }, [
+        _vm._v("All(556)")
+      ]),
+      _vm._v("  \n                                "),
+      _c("button", { staticClass: "btn btn-primary btn-sm" }, [
+        _vm._v("pending(556)")
+      ]),
+      _vm._v("  \n                                "),
+      _c("button", { staticClass: "btn btn-primary btn-sm" }, [
+        _vm._v("failure(556)")
+      ]),
+      _vm._v("  \n                                "),
+      _c("button", { staticClass: "btn btn-primary btn-sm" }, [
+        _vm._v("success(556)")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row mt-4 mb-4" }, [
+      _c("div", { staticClass: "col-2" }),
+      _vm._v(" "),
+      _c("h6", [_vm._v("Shelf status")]),
+      _vm._v(
+        "\n                                   \n                                "
+      ),
+      _c("button", { staticClass: "btn btn-primary btn-sm" }, [
+        _vm._v("All(556)")
+      ]),
+      _vm._v("  \n                                "),
+      _c("button", { staticClass: "btn btn-primary btn-sm" }, [
+        _vm._v("Off Shelf(556)")
+      ]),
+      _vm._v("  \n                                "),
+      _c("button", { staticClass: "btn btn-primary btn-sm" }, [
+        _vm._v("On Shelf (556)")
+      ]),
+      _vm._v("  \n                                "),
+      _c("button", { staticClass: "btn btn-primary btn-sm" }, [
+        _vm._v("Disable (556)")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row mt-4 mb-4" }, [
+      _c("div", { staticClass: "col-2" }),
+      _vm._v(" "),
+      _c("h6", [_vm._v("Product Type")]),
+      _vm._v(
+        "\n                                   \n                                "
+      ),
+      _c("button", { staticClass: "btn btn-primary btn-sm" }, [
+        _vm._v("All(556)")
+      ]),
+      _vm._v("  \n                                "),
+      _c("button", { staticClass: "btn btn-primary btn-sm" }, [
+        _vm._v("Original(556)")
+      ]),
+      _vm._v("  \n                                "),
+      _c("button", { staticClass: "btn btn-primary btn-sm" }, [
+        _vm._v("Crawl(556)")
+      ]),
+      _vm._v("  \n                                "),
+      _c("button", { staticClass: "btn btn-primary btn-sm" }, [
+        _vm._v("Overseas(556)")
+      ]),
+      _vm._v("  \n                                "),
+      _c("button", { staticClass: "btn btn-primary btn-sm" }, [
+        _vm._v("Important(556)")
+      ]),
+      _vm._v("  \n                                "),
+      _c("button", { staticClass: "btn btn-primary btn-sm" }, [
+        _vm._v("Library(556)")
+      ]),
+      _vm._v("  \n                                "),
+      _c("button", { staticClass: "btn btn-primary btn-sm" }, [
+        _vm._v("Other(556)")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", { attrs: { role: "row" } }, [
         _c(
@@ -42640,7 +43062,39 @@ var staticRenderFns = [
               "aria-label": "Office: activate to sort column ascending"
             }
           },
-          [_vm._v("Short Description")]
+          [_vm._v("Internal SKU")]
+        ),
+        _vm._v(" "),
+        _c(
+          "th",
+          {
+            staticClass: "sorting",
+            staticStyle: { width: "105px" },
+            attrs: {
+              tabindex: "0",
+              "aria-controls": "ajax-datatable",
+              rowspan: "1",
+              colspan: "1",
+              "aria-label": "Office: activate to sort column ascending"
+            }
+          },
+          [_vm._v("Product Type")]
+        ),
+        _vm._v(" "),
+        _c(
+          "th",
+          {
+            staticClass: "sorting",
+            staticStyle: { width: "105px" },
+            attrs: {
+              tabindex: "0",
+              "aria-controls": "ajax-datatable",
+              rowspan: "1",
+              colspan: "1",
+              "aria-label": "Office: activate to sort column ascending"
+            }
+          },
+          [_vm._v("Price")]
         ),
         _vm._v(" "),
         _c(
@@ -42656,7 +43110,23 @@ var staticRenderFns = [
               "aria-label": "Extn.: activate to sort column ascending"
             }
           },
-          [_vm._v("Created By.")]
+          [_vm._v("Created By")]
+        ),
+        _vm._v(" "),
+        _c(
+          "th",
+          {
+            staticClass: "sorting",
+            staticStyle: { width: "49px" },
+            attrs: {
+              tabindex: "0",
+              "aria-controls": "ajax-datatable",
+              rowspan: "1",
+              colspan: "1",
+              "aria-label": "Extn.: activate to sort column ascending"
+            }
+          },
+          [_vm._v("Created At")]
         ),
         _vm._v(" "),
         _c(
@@ -42692,11 +43162,21 @@ var staticRenderFns = [
         _c("th", { attrs: { rowspan: "1", colspan: "1" } }, [_vm._v("Title")]),
         _vm._v(" "),
         _c("th", { attrs: { rowspan: "1", colspan: "1" } }, [
-          _vm._v("Short Description")
+          _vm._v("Internal SKU")
         ]),
         _vm._v(" "),
         _c("th", { attrs: { rowspan: "1", colspan: "1" } }, [
+          _vm._v("Product Type")
+        ]),
+        _vm._v(" "),
+        _c("th", { attrs: { rowspan: "1", colspan: "1" } }, [_vm._v("Price")]),
+        _vm._v(" "),
+        _c("th", { attrs: { rowspan: "1", colspan: "1" } }, [
           _vm._v("Created By")
+        ]),
+        _vm._v(" "),
+        _c("th", { attrs: { rowspan: "1", colspan: "1" } }, [
+          _vm._v("Created At")
         ]),
         _vm._v(" "),
         _c(

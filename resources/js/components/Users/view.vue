@@ -281,7 +281,7 @@
                         icon: "warning",
                     });
                 }
-                
+
                 if(flag) {
                     let self = this;
                     self.product_datatable.destroy();

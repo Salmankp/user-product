@@ -16,12 +16,21 @@
                                     <b style="font-size:22px">Products Detail</b>
                                 </div>
                                 <div class="row mt-4 mb-4">
+
                                     <div class="col-md-2"></div>
+
                                     <div class="col-md-2">
                                         <select class="form-control valid" aria-invalid="false" v-model="search_category">
                                             <option value="" disabled selected>Select Category</option>
                                             <option :value="data.id" selected v-for="data in category">
                                                 {{data.title}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <select class="form-control valid" aria-invalid="false" v-model="search_internal_sku">
+                                            <option value="" disabled selected>Select Internal Sku</option>
+                                            <option :value="data.internal_sku" selected v-for="detail in data">
+                                                {{data.internal_sku}}</option>
                                         </select>
                                     </div>
                                     <div class="col-md-2" v-if="user.role=='admin' || user.role=='Master User'">
@@ -31,6 +40,12 @@
                                                 {{data.username}}</option>
                                         </select>
                                     </div>
+                                </div>
+
+                                <div class="row mt-4 mb-4">
+
+                                   <div class="col-md-2"></div>
+
                                     <div class="col-md-2">
                                         <select class="form-control valid" aria-invalid="false" v-model="search_shelf">
                                             <option value="" disabled selected>Select Shelf Status</option>
@@ -48,10 +63,57 @@
                                         </select>
                                     </div>
                                     <div class="col-md-2">
+                                        <select class="form-control valid" aria-invalid="false" v-model="search_product_type">
+                                            <option value="" disabled selected>Product Type</option>
+                                            <option value="1">Original</option>
+                                            <option value="2">Crawl</option>
+                                            <option value="3">Overseas</option>
+                                            <option value="4">Important</option>
+                                            <option value="5">Library</option>
+                                            <option value="6">other</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2">
                                         <button @click="search" class="btn btn-info text-left">Search</button>
                                         <button @click="reset_value()" class="btn btn-danger text-right">Reset</button>
                                     </div>
                                 </div>
+
+                                <div class="row mt-4 mb-4">
+                                    <div class="col-2"></div>
+
+                                    <h6>Approval status</h6>
+                                    &nbsp;&nbsp;&nbsp;
+                                    <button class="btn btn-primary btn-sm">All(556)</button>&nbsp;&nbsp;
+                                    <button class="btn btn-primary btn-sm">pending(556)</button>&nbsp;&nbsp;
+                                    <button class="btn btn-primary btn-sm">failure(556)</button>&nbsp;&nbsp;
+                                    <button class="btn btn-primary btn-sm">success(556)</button>
+                                </div>
+
+                                <div class="row mt-4 mb-4">
+                                    <div class="col-2"></div>
+
+                                    <h6>Shelf status</h6>
+                                    &nbsp;&nbsp;&nbsp;
+                                    <button class="btn btn-primary btn-sm">All(556)</button>&nbsp;&nbsp;
+                                    <button class="btn btn-primary btn-sm">Off Shelf(556)</button>&nbsp;&nbsp;
+                                    <button class="btn btn-primary btn-sm">On Shelf (556)</button>&nbsp;&nbsp;
+                                    <button class="btn btn-primary btn-sm">Disable (556)</button>
+                                </div>
+                                <div class="row mt-4 mb-4">
+                                    <div class="col-2"></div>
+
+                                    <h6>Product Type</h6>
+                                    &nbsp;&nbsp;&nbsp;
+                                    <button class="btn btn-primary btn-sm">All(556)</button>&nbsp;&nbsp;
+                                    <button class="btn btn-primary btn-sm">Original(556)</button>&nbsp;&nbsp;
+                                    <button class="btn btn-primary btn-sm">Crawl(556)</button>&nbsp;&nbsp;
+                                    <button class="btn btn-primary btn-sm">Overseas(556)</button>&nbsp;&nbsp;
+                                    <button class="btn btn-primary btn-sm">Important(556)</button>&nbsp;&nbsp;
+                                    <button class="btn btn-primary btn-sm">Library(556)</button>&nbsp;&nbsp;
+                                    <button class="btn btn-primary btn-sm">Other(556)</button>
+                                </div>
+
                             </div>
                             <div class="card-body">
                                 <div id="ajax-datatable_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
@@ -64,8 +126,11 @@
                                         <th class="sorting_asc" tabindex="0" aria-controls="ajax-datatable" rowspan="1" colspan="1" aria-label="Name: activate to sort column descending" aria-sort="ascending" style="width: 144px;">Image</th>
                                         <th class="sorting" tabindex="0" aria-controls="ajax-datatable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 221px;">Category Name</th>
                                         <th class="sorting" tabindex="0" aria-controls="ajax-datatable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 221px;">Title</th>
-                                        <th class="sorting" tabindex="0" aria-controls="ajax-datatable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 105px;">Short Description</th>
-                                        <th class="sorting" tabindex="0" aria-controls="ajax-datatable" rowspan="1" colspan="1" aria-label="Extn.: activate to sort column ascending" style="width: 49px;">Created By.</th>
+                                        <th class="sorting" tabindex="0" aria-controls="ajax-datatable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 105px;">Internal SKU</th>
+                                        <th class="sorting" tabindex="0" aria-controls="ajax-datatable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 105px;">Product Type</th>
+                                        <th class="sorting" tabindex="0" aria-controls="ajax-datatable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 105px;">Price</th>
+                                        <th class="sorting" tabindex="0" aria-controls="ajax-datatable" rowspan="1" colspan="1" aria-label="Extn.: activate to sort column ascending" style="width: 49px;">Created By</th>
+                                        <th class="sorting" tabindex="0" aria-controls="ajax-datatable" rowspan="1" colspan="1" aria-label="Extn.: activate to sort column ascending" style="width: 49px;">Created At</th>
                                         <th class="sorting text-center" tabindex="0" aria-controls="ajax-datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 93px;">Action</th>
                                     </tr>
                                     </thead>
@@ -73,8 +138,11 @@
                                     <tr><th rowspan="1" colspan="1">Image</th>
                                         <th rowspan="1" colspan="1">Category Name</th>
                                         <th rowspan="1" colspan="1">Title</th>
-                                        <th rowspan="1" colspan="1">Short Description</th>
+                                        <th rowspan="1" colspan="1">Internal SKU</th>
+                                        <th rowspan="1" colspan="1">Product Type</th>
+                                        <th rowspan="1" colspan="1">Price</th>
                                         <th rowspan="1" colspan="1">Created By</th>
+                                        <th rowspan="1" colspan="1">Created At</th>
                                         <th rowspan="1" colspan="1" class="text-center">Action</th>
                                     </tr>
                                     </tfoot>
@@ -88,8 +156,30 @@
                                         </td>
                                         <td>{{detail.category.title}}</td>
                                         <td>{{detail.title}}</td>
-                                        <td>{{detail.short_description}}</td>
+                                        <td>{{detail.internal_sku}}</td>
+
+                                        <td v-if="detail.product_type==1">
+                                          original
+                                        </td>
+                                        <td v-if="detail.product_type==2">
+                                           crawl
+                                        </td>
+                                        <td v-if="detail.product_type==3">
+                                            overseas
+                                        </td>
+                                        <td v-if="detail.product_type==4">
+                                            important
+                                        </td>
+                                        <td v-if="detail.product_type==5">
+                                          library
+                                        </td>
+                                        <td v-if="detail.product_type==6">
+                                           other
+                                        </td>
+
+                                        <td>{{detail.buying_price}}</td>
                                         <td>{{detail.user.username}}</td>
+                                        <td>{{detail.created_at}}</td>
                                         <td class="text-center"> <a href="#" title="Edit Product" class="btn btn-info btn-icon btn-sm edit" v-on:click="edit_product(detail.id)">
                                             <i class="fa fa-edit"  title="Edit"></i></a>
                                             <a href="#" v-on:click="delete_product(detail.id)" title="Delete Product" class="btn btn-danger btn-icon btn-sm delete">
@@ -339,6 +429,13 @@
                                         </div>
                                     </div>
                                 </div>
+
+                        <!-- row -->
+                        <div class="row mt-2">
+
+                            <!-- status col-6 -->
+                            <div class="col-6">
+
                                 <div class="row mt-2">
                                     <div class="col-md-12">
                                         <p class="fw-600 text-center">Approval Status</p>
@@ -436,24 +533,35 @@
                                                 </label>
                                             </div>
                                         </div>
-
-                                        <div class="row mt-2">
-                                            <div class="col-md-12">
-                                                <label for="exampleInputEmail1"><b>Select Product Images</b></label>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <input type="file" @change="image_change"  name="image" ref="files" multiple/>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <p v-for="(image,index) in images" :key="index">{{image.name}}</p>
-                                            </div>
-                                        </div>
                                     </div>
 
                                 </div>
+
+                            <!-- end status col-6 -->
                             </div>
+
+
+                            <div class="col-6">
+                                <div class="row mt-2">
+                                    <div class="col-md-12">
+                                        <label for="exampleInputEmail1"><b>Select Product Images</b></label>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <input type="file" @change="image_change"  name="image" ref="files" multiple/>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <p v-for="(image,index) in images" :key="index">{{image.name}}</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                         </div>
+                        <!-- end row -->
+
+                        </div>
+
 
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -478,9 +586,11 @@
             return {
                 users:[],
                 search_category:'',
+                search_internal_sku:'',
                 search_user:'',
                 search_shelf:'',
                 search_approval:'',
+                search_product_type:'',
                 img_url:'',
                add_product:{
                   'id':'',
@@ -569,7 +679,7 @@
             search()
             {
                 let self=this;
-                if(this.search_approval=='' && this.search_shelf=='' && this.search_category=='' && this.search_user=='')
+                if(this.search_approval=='' && this.search_shelf=='' && this.search_category=='' && this.search_user=='' && this.search_internal_sku==''&& this.search_product_type=='')
                 {
                     return swal({
                         title: "Search Field is Required",
