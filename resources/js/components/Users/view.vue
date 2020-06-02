@@ -281,34 +281,7 @@
                         icon: "warning",
                     });
                 }
-                if(this.add_user.field1=='')
-                {
-                    flag=false;
-                    return swal({
-                        title: "Extra Field 1 is Required",
-                        text: "Please enter in Extra field 1",
-                        icon: "warning",
-                    });
-                }
-                if(this.add_user.field2=='')
-                {
-                    flag=false;
-                    return swal({
-                        title: "Extra Field 2 is Required",
-                        text: "Please enter in Extra field 2",
-                        icon: "warning",
-                    });
-                }
-                if(this.add_user.field3=='')
-                {
-                    flag=false;
-                    return swal({
-                        title: "Extra Field 3 is Required",
-                        text: "Please enter in Extra field 3",
-                        icon: "warning",
-                    });
-                }
-
+                
                 if(flag) {
                     let self = this;
                     self.product_datatable.destroy();
