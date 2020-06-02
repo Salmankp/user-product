@@ -339,8 +339,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-6">
+                                <div class="row mt-2">
+                                    <div class="col-md-12">
                                         <p class="fw-600 text-center">Approval Status</p>
                                         <div class="row">
                                             <div class="col-md-4">
@@ -365,8 +365,10 @@
                                         </div>
 
                                     </div>
+                                </div>
 
-                                    <div class="col-md-6">
+                                <div class="row mt-2">
+                                    <div class="col-md-12">
                                         <p class="fw-600 text-center">Shelf Status</p>
                                         <div class="row">
                                             <div class="col-md-4">
@@ -621,20 +623,6 @@
                         icon: "warning",
                     });
                 }
-                if(this.add_product.sku=='') {
-                    flag=false;
-                    return swal({
-                        title: "Product Sku is Required",
-                        icon: "warning",
-                    });
-                }
-                if(this.add_product.keyword=='') {
-                    flag=false;
-                    return swal({
-                        title: "Product Keyword is Required",
-                        icon: "warning",
-                    });
-                }
                 if(this.add_product.category=='') {
                     flag=false;
                     return swal({
@@ -642,73 +630,10 @@
                         icon: "warning",
                     });
                 }
-                if(this.add_product.desc=='') {
-                    flag=false;
-                    return swal({
-                        title: "Product Description is Required",
-                        icon: "warning",
-                    });
-                }
-                if(this.add_product.short_desc=='') {
-                    flag=false;
-                    return swal({
-                        title: "Product Short Description is Required",
-                        icon: "warning",
-                    });
-                }
-                if(this.add_product.trade_name=='') {
-                    flag=false;
-                    return swal({
-                        title: "Product Trade Name is Required",
-                        icon: "warning",
-                    });
-                }
-                if(this.add_product.brand_name=='') {
-                    flag=false;
-                    return swal({
-                        title: "Product Brand Name is Required",
-                        icon: "warning",
-                    });
-                }
                 if(this.add_product.internal_sku=='') {
                     flag=false;
                     return swal({
                         title: "Internal Sku is Required",
-                        icon: "warning",
-                    });
-                }
-                if(this.add_product.manufact_number=='') {
-                    flag=false;
-                    return swal({
-                        title: "Manufacthure Number is Required",
-                        icon: "warning",
-                    });
-                }
-                if(this.add_product.product_source=='') {
-                    flag=false;
-                    return swal({
-                        title: "Product Source is Required",
-                        icon: "warning",
-                    });
-                }
-                if(this.add_product.source_url=='') {
-                    flag=false;
-                    return swal({
-                        title: "Product Source URL is Required",
-                        icon: "warning",
-                    });
-                }
-                if(this.add_product.product_code=='') {
-                    flag=false;
-                    return swal({
-                        title: "Product Code is Required",
-                        icon: "warning",
-                    });
-                }
-                if(this.add_product.remarks=='') {
-                    flag=false;
-                    return swal({
-                        title: "Product Remarks is Required",
                         icon: "warning",
                     });
                 }
@@ -747,20 +672,6 @@
                         icon: "warning",
                     });
                 }
-                if(this.add_product.dom_freight=='') {
-                    flag=false;
-                    return swal({
-                        title: "Product Domestic Freight is Required",
-                        icon: "warning",
-                    });
-                }
-                if(this.add_product.int_freight=='') {
-                    flag=false;
-                    return swal({
-                        title: "Product International Freight is Required",
-                        icon: "warning",
-                    });
-                }
                 if(this.add_product.discount=='') {
                     flag=false;
                     return swal({
@@ -779,62 +690,6 @@
                     flag=false;
                     return swal({
                         title: "Product Fill Time is Required",
-                        icon: "warning",
-                    });
-                }
-                if(this.add_product.extra_field1=='') {
-                    flag=false;
-                    return swal({
-                        title: "Product Extra Field 1 is Required",
-                        icon: "warning",
-                    });
-                }
-                if(this.add_product.extra_field2=='') {
-                    flag=false;
-                    return swal({
-                        title: "Product Extra Field 2 is Required",
-                        icon: "warning",
-                    });
-                }
-                if(this.add_product.extra_field3=='') {
-                    flag=false;
-                    return swal({
-                        title: "Product Extra Field 3 is Required",
-                        icon: "warning",
-                    });
-                }
-                if(this.add_product.extra_field4=='') {
-                    flag=false;
-                    return swal({
-                        title: "Product Extra Field 4 is Required",
-                        icon: "warning",
-                    });
-                }
-                if(this.add_product.extra_field5=='') {
-                    flag=false;
-                    return swal({
-                        title: "Product Extra Field 5 is Required",
-                        icon: "warning",
-                    });
-                }
-                if(this.add_product.approval_status=='') {
-                    flag=false;
-                    return swal({
-                        title: "Product Approval Status is Required",
-                        icon: "warning",
-                    });
-                }
-                if(this.add_product.shelf_status=='') {
-                    flag=false;
-                    return swal({
-                        title: "Product Shelf Status is Required",
-                        icon: "warning",
-                    });
-                }
-                if(this.add_product.product_type=='') {
-                    flag=false;
-                    return swal({
-                        title: "Product Type is Required",
                         icon: "warning",
                     });
                 }
