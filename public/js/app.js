@@ -43753,7 +43753,7 @@ var render = function() {
                               [_vm._v("Select Role")]
                             ),
                             _vm._v(" "),
-                            (_vm.user.role = "Admin")
+                            _vm.user.role == "admin"
                               ? _c(
                                   "option",
                                   { attrs: { value: "Master User" } },

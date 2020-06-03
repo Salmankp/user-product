@@ -107,9 +107,11 @@ class UserController extends Controller
     {
         $user=Auth::user();
         if($user->hasRole('Admin')){
+            // showing all users for admin
             $data = User::where('id', '!=', auth()->user()->id)->get();
         }
         elseif($user->hasRole('Master User')){
+            // showing child users that are created by master
             $data = User::where('created_by', auth()->user()->id)->get();
         }
 
