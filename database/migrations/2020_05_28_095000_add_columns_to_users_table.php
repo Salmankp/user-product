@@ -14,7 +14,7 @@ class AddColumnsToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('username')->nullable()->after('email');
+            $table->string('username')->nullable()->unique()->after('email');
             $table->string('role')->nullable()->after('username');
             $table->boolean('status')->nullable()->default(0)->after('role')->comment('0=inactive , 1=active');
             $table->integer('created_by')->nullable()->after('status');

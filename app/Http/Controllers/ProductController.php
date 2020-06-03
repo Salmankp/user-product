@@ -23,14 +23,17 @@ class ProductController extends Controller
         $user=Auth::user();
         $user_id=Auth::id();
         if($user->hasRole('Admin')){
+            // all products for admin
             $data=Product::with('product_image','user','category')->get();
         }
         elseif ($user->hasRole('Master User')){
+            // getting products of child users that are created by master user
             $child_users_id = User::where('created_by' , $user_id)->pluck('id');
             $data=Product::with('product_image','user','category')->
             whereIn('user_id',$child_users_id)->orWhere('user_id' , $user_id)->get();
         }
         elseif ($user->hasRole('Child User')){
+            // child user products
             $data=Product::with('product_image','user','category')->where('user_id',$user_id)->get();
         }
 
@@ -63,7 +66,7 @@ class ProductController extends Controller
         }
      //  $product=new Product;
        $product->title=$request->title;
-       $product->fill_time=$request->Fill_time;
+       $product->fill_time=$request->fill_time;
        $product->brand_name=$request->brand_name;
        $product->buying_price=$request->buying_price;
        $product->category_id=$request->category;
@@ -97,6 +100,7 @@ class ProductController extends Controller
        $product->user_id=$request->user_id;
        $product->save();
 
+       // storing in aws s3
         if($request->hasFile('files'))
         {
             $images = $request->file('files');
@@ -199,6 +203,7 @@ class ProductController extends Controller
 
     public function search(Request $request)
     {
+        // search product filters
        $user_id=$request->user;
        $category_id=$request->category;
        $shelf=$request->shelf;

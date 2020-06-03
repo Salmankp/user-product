@@ -111,7 +111,7 @@
                                         <label for="exampleInputEmail1">Role</label>
                                         <select class="form-control valid" aria-invalid="false" v-model="add_user.role">
                                             <option value="" selected>Select Role</option>
-                                            <option value="Master User" v-if="user.role='Admin'">Master User</option>
+                                            <option value="Master User" v-if="user.role=='admin'">Master User</option>
                                             <option value="Child User">Child User</option>
                                         </select>
                                     </div>
