@@ -9,9 +9,10 @@
 
         <form class="form-signin" method="POST" action="{{ route('login') }}">
             @csrf
-            <a href="" class="brand text-center">
+          {{--  <a href="" class="brand text-center">
                 <img src="assets/img/logo-dark.png" alt=""/>
-            </a>
+            </a>--}}
+            <h2 class="text-center">Logo</h2>
             <h2 class="form-signin-heading">Please sign in</h2>
             <div class="form-group">
                 <label for="email" class="sr-only">Email address</label>

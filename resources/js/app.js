@@ -11,6 +11,7 @@ Vue.component('view-products', require('./components/Products/view').default);
 Vue.component('view-category', require('./components/Category/view').default);
 Vue.component('view-users', require('./components/Users/view').default);
 Vue.component('change-password', require('./components/Users/change_password').default);
+Vue.component('profile-view', require('./components/Users/profile_view').default);
 
 /**
  * The following block of code may be used to automatically register your
