@@ -27,11 +27,7 @@
                                         </select>
                                     </div>
                                     <div class="col-md-2">
-                                        <select class="form-control valid" aria-invalid="false" v-model="search_internal_sku">
-                                            <option value="" disabled selected>Select Internal Sku</option>
-                                            <option :value="data.internal_sku" selected v-for="detail in data">
-                                                {{data.internal_sku}}</option>
-                                        </select>
+                                        <input type="text" class="form-control" placeholder="Enter Internal Sku" v-model="search_internal_sku">
                                     </div>
                                     <div class="col-md-2" v-if="user.role=='admin' || user.role=='Master User'">
                                         <select class="form-control valid" aria-invalid="false" v-model="search_user">
@@ -75,7 +71,7 @@
                                     </div>
                                     <div class="col-md-2">
                                         <button @click="search" class="btn btn-info text-left">Search</button>
-                                        <button @click="reset_value()" class="btn btn-danger text-right">Reset</button>
+                                        <button @click="reset_filter()" class="btn btn-danger text-right">Reset</button>
                                     </div>
                                 </div>
 
@@ -84,10 +80,11 @@
 
                                     <h6>Approval status</h6>
                                     &nbsp;&nbsp;&nbsp;
-                                    <button class="btn btn-primary btn-sm">All(556)</button>&nbsp;&nbsp;
-                                    <button class="btn btn-primary btn-sm">pending(556)</button>&nbsp;&nbsp;
-                                    <button class="btn btn-primary btn-sm">failure(556)</button>&nbsp;&nbsp;
-                                    <button class="btn btn-primary btn-sm">success(556)</button>
+                                    <button class="btn btn-primary btn-sm">All {{(
+                                        pending_count+failure_count+success_count)}}</button>&nbsp;&nbsp;
+                                    <button class="btn btn-primary btn-sm">pending {{(pending_count)}}</button>&nbsp;&nbsp;
+                                    <button class="btn btn-primary btn-sm">failure {{(failure_count)}}</button>&nbsp;&nbsp;
+                                    <button class="btn btn-primary btn-sm">success {{(success_count)}}</button>
                                 </div>
 
                                 <div class="row mt-4 mb-4">
@@ -95,23 +92,25 @@
 
                                     <h6>Shelf status</h6>
                                     &nbsp;&nbsp;&nbsp;
-                                    <button class="btn btn-primary btn-sm">All(556)</button>&nbsp;&nbsp;
-                                    <button class="btn btn-primary btn-sm">Off Shelf(556)</button>&nbsp;&nbsp;
-                                    <button class="btn btn-primary btn-sm">On Shelf (556)</button>&nbsp;&nbsp;
-                                    <button class="btn btn-primary btn-sm">Disable (556)</button>
+                                    <button class="btn btn-primary btn-sm">All {{(off_shelf_count+on_shelf_count+disable_count)}}</button>&nbsp;&nbsp;
+                                    <button class="btn btn-primary btn-sm">Off shelf {{(off_shelf_count)}}</button>&nbsp;&nbsp;
+                                    <button class="btn btn-primary btn-sm">On shelf {{(on_shelf_count)}}</button>&nbsp;&nbsp;
+                                    <button class="btn btn-primary btn-sm">Disable {{(disable_count)}}</button>
                                 </div>
                                 <div class="row mt-4 mb-4">
                                     <div class="col-2"></div>
 
                                     <h6>Product Type</h6>
                                     &nbsp;&nbsp;&nbsp;
-                                    <button class="btn btn-primary btn-sm">All(556)</button>&nbsp;&nbsp;
-                                    <button class="btn btn-primary btn-sm">Original(556)</button>&nbsp;&nbsp;
-                                    <button class="btn btn-primary btn-sm">Crawl(556)</button>&nbsp;&nbsp;
-                                    <button class="btn btn-primary btn-sm">Overseas(556)</button>&nbsp;&nbsp;
-                                    <button class="btn btn-primary btn-sm">Important(556)</button>&nbsp;&nbsp;
-                                    <button class="btn btn-primary btn-sm">Library(556)</button>&nbsp;&nbsp;
-                                    <button class="btn btn-primary btn-sm">Other(556)</button>
+                                    <button class="btn btn-primary btn-sm">All
+                                        {{(original+crawl+overseas+important+library+others)}}</button>&nbsp;&nbsp;
+                                    <button class="btn btn-primary btn-sm">
+                                      Original {{(original)}}</button>&nbsp;&nbsp;
+                                    <button class="btn btn-primary btn-sm">Crawl {{(crawl)}}</button>&nbsp;&nbsp;
+                                    <button class="btn btn-primary btn-sm">Overseas {{(overseas)}}</button>&nbsp;&nbsp;
+                                    <button class="btn btn-primary btn-sm">Important {{(important)}}</button>&nbsp;&nbsp;
+                                    <button class="btn btn-primary btn-sm">Library {{(library)}}</button>&nbsp;&nbsp;
+                                    <button class="btn btn-primary btn-sm">Others {{(others)}}</button>
                                 </div>
 
                             </div>
@@ -195,7 +194,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal" data-backdrop="false"  id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal modal-open" data-backdrop="false"  id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document" style="max-width: 1200px">
                         <div class="modal-content" >
                             <div class="modal-header">
@@ -584,6 +583,18 @@
         props:['user'],
         data() {
             return {
+                pending_count:0,
+                failure_count:0,
+                success_count:0,
+                off_shelf_count:0,
+                on_shelf_count:0,
+                disable_count:0,
+                original:0,
+                crawl:0,
+                overseas:0,
+                important:0,
+                library:0,
+                others:0,
                 users:[],
                 search_category:'',
                 search_internal_sku:'',
@@ -623,9 +634,9 @@
                  'extra_field3':'',
                  'extra_field4':'',
                  'extra_field5':'',
-                 'approval_status':null,
-                 'shelf_status':null,
-                 'product_type':null,
+                 'approval_status':1,
+                 'shelf_status':1,
+                 'product_type':1,
                },
                 status:'',
                 images:[],
@@ -668,7 +679,63 @@
                         });
                     },600);
                     this.data=response.data;
-            })
+                $.each(response.data, function(key, value) {
+                   console.log(value.approval_status);
+                   if(value.product_type==1) {
+                       console.log('1');
+                       self.original++;
+                   }
+                    if(value.product_type==2) {
+                        console.log('2');
+                        this.crawl++;
+                    }if(value.product_type==3) {
+                        console.log('3');
+                        self.overseas++;
+                    }
+                    if(value.product_type==4) {
+                        console.log('4');
+                        self.important++;
+                    }
+                    if(value.product_type==5) {
+                        console.log('5');
+                        self.library++;
+                    }if(value.product_type==6) {
+                        console.log('6');
+                        self.others++;
+                    }
+                });
+
+            $.each(response.data, function(key, value) {
+                console.log(value.shelf_status);
+                if(value.shelf_status==1) {
+                    console.log('4');
+                    self.off_shelf_count++;
+                }
+                if(value.shelf_status==2) {
+                    console.log('5');
+                    self.on_shelf_count++;
+                }if(value.shelf_status==3) {
+                    console.log('6');
+                    self.disable_count++;
+                }
+            });
+
+                $.each(response.data, function(key, value) {
+                    console.log(value.approval_status);
+                    if(value.approval_status==1) {
+                        console.log('1');
+                        self.pending_count++;
+                    }
+                    if(value.approval_status==2) {
+                        console.log('2');
+                        self.failure_count++;
+                    }if(value.approval_status==3) {
+                        console.log('3');
+                        self.success_count++;
+                    }
+                });
+
+            });
 
             axios.get('/get/all/users', {
             }).then((response) => {
@@ -694,6 +761,8 @@
                         category: this.search_category,
                         shelf: this.search_shelf,
                         approval: this.search_approval,
+                        product_type:this.search_product_type,
+                        internal_sku:this.search_internal_sku,
                         user: this.search_user,
                     }).then((response) => {
                         $(document).ready(function () {
@@ -714,12 +783,93 @@
                 }
             },
 
-            reset_value()
+            reset_filter()
             {
+             let self = this;
               this.search_category='';
               this.search_user='';
               this.search_shelf='';
               this.search_approval='';
+              this.search_internal_sku='';
+              this.search_product_type='';
+                self.product_datatable.destroy();
+                axios.get('/get/product', {
+                }).then((response) => {
+                    this.reset_value();
+                    setTimeout(function () {
+                        jQuery.noConflict();
+                        $(document).ready(function () {
+                            self.product_datatable=$('#ajax-datatable').DataTable({
+                                language: {
+                                    search: "_INPUT_",
+                                    searchPlaceholder: "Search records",
+                                },
+                                "fnDrawCallback":function(){
+                                    $("input[type='search']").attr("id", "searchBox");
+                                    $('#searchBox').css("width", "200px");
+                                    $('.dataTables_filter').css("float", "right");
+                                }
+                            });
+                        });
+                    },600);
+                    this.data=response.data;
+                    $.each(response.data, function(key, value) {
+                        console.log(value.approval_status);
+                        if(value.product_type==1) {
+                            console.log('1');
+                            self.original++;
+                        }
+                        if(value.product_type==2) {
+                            console.log('2');
+                            this.crawl++;
+                        }if(value.product_type==3) {
+                            console.log('3');
+                            self.overseas++;
+                        }
+                        if(value.product_type==4) {
+                            console.log('4');
+                            self.important++;
+                        }
+                        if(value.product_type==5) {
+                            console.log('5');
+                            self.library++;
+                        }if(value.product_type==6) {
+                            console.log('6');
+                            self.others++;
+                        }
+                    });
+
+                    $.each(response.data, function(key, value) {
+                        console.log(value.shelf_status);
+                        if(value.shelf_status==1) {
+                            console.log('1');
+                            self.off_shelf_count++;
+                        }
+                        if(value.shelf_status==2) {
+                            console.log('2');
+                            self.on_shelf_count++;
+                        }if(value.shelf_status==3) {
+                            console.log('3');
+                            self.disable_count++;
+                        }
+                    });
+
+                    $.each(response.data, function(key, value) {
+                        console.log(value.approval_status);
+                        if(value.approval_status==1) {
+                            console.log('1');
+                            self.pending_count++;
+                        }
+                        if(value.approval_status==2) {
+                            console.log('2');
+                            self.failure_count++;
+                        }if(value.approval_status==3) {
+                            console.log('3');
+                            self.success_count++;
+                        }
+                    });
+                })
+
 
             },
             submit_product()
@@ -869,6 +1019,62 @@
                                 }
                             });
                         });
+                        this.reset_value();
+                        $.each(response.data, function(key, value) {
+                            console.log(value.approval_status);
+                            if(value.product_type==1) {
+                                console.log('1');
+                                self.original++;
+                            }
+                            if(value.product_type==2) {
+                                console.log('2');
+                                this.crawl++;
+                            }if(value.product_type==3) {
+                                console.log('3');
+                                self.overseas++;
+                            }
+                            if(value.product_type==4) {
+                                console.log('4');
+                                self.important++;
+                            }
+                            if(value.product_type==5) {
+                                console.log('5');
+                                self.library++;
+                            }if(value.product_type==6) {
+                                console.log('6');
+                                self.others++;
+                            }
+                        });
+
+                        $.each(response.data, function(key, value) {
+                            console.log(value.shelf_status);
+                            if(value.shelf_status==1) {
+                                console.log('1');
+                                self.off_shelf_count++;
+                            }
+                            if(value.shelf_status==2) {
+                                console.log('2');
+                                self.on_shelf_count++;
+                            }if(value.shelf_status==3) {
+                                console.log('3');
+                                self.disable_count++;
+                            }
+                        });
+
+                        $.each(response.data, function(key, value) {
+                            console.log(value.approval_status);
+                            if(value.approval_status==1) {
+                                console.log('1');
+                                self.pending_count++;
+                            }
+                            if(value.approval_status==2) {
+                                console.log('2');
+                                self.failure_count++;
+                            }if(value.approval_status==3) {
+                                console.log('3');
+                                self.success_count++;
+                            }
+                        });
                         // $('#exampleModal').modal('toggle');
                         $('#exampleModal').toggle();
                         $('#exampleModal').removeClass('.modal-backdrop.show');
@@ -893,6 +1099,7 @@
                         self.product_datatable.destroy();
                         axios.get('/delete/product/' + id).then((response) => {
                             if (response.data) {
+                                this.reset_value();
                                 $(document).ready(function () {
                                     self.product_datatable = $('#ajax-datatable').DataTable({
                                         language: {
@@ -907,6 +1114,62 @@
                                     });
                                 });
                                 this.data = response.data;
+                                this.reset_value();
+                                $.each(response.data, function(key, value) {
+                                    console.log(value.approval_status);
+                                    if(value.product_type==1) {
+                                        console.log('1');
+                                        self.original++;
+                                    }
+                                    if(value.product_type==2) {
+                                        console.log('2');
+                                        this.crawl++;
+                                    }if(value.product_type==3) {
+                                        console.log('3');
+                                        self.overseas++;
+                                    }
+                                    if(value.product_type==4) {
+                                        console.log('4');
+                                        self.important++;
+                                    }
+                                    if(value.product_type==5) {
+                                        console.log('5');
+                                        self.library++;
+                                    }if(value.product_type==6) {
+                                        console.log('6');
+                                        self.others++;
+                                    }
+                                });
+
+                                $.each(response.data, function(key, value) {
+                                    console.log(value.shelf_status);
+                                    if(value.shelf_status==1) {
+                                        console.log('1');
+                                        self.off_shelf_count++;
+                                    }
+                                    if(value.shelf_status==2) {
+                                        console.log('2');
+                                        self.on_shelf_count++;
+                                    }if(value.shelf_status==3) {
+                                        console.log('3');
+                                        self.disable_count++;
+                                    }
+                                });
+
+                                $.each(response.data, function(key, value) {
+                                    console.log(value.approval_status);
+                                    if(value.approval_status==1) {
+                                        console.log('1');
+                                        self.pending_count++;
+                                    }
+                                    if(value.approval_status==2) {
+                                        console.log('2');
+                                        self.failure_count++;
+                                    }if(value.approval_status==3) {
+                                        console.log('3');
+                                        self.success_count++;
+                                    }
+                                });
                             }
                         });
                     }
@@ -954,9 +1217,36 @@
                          $('#exampleModal').modal('toggle');
                 });
             },
+            reset_value()
+            {
+                this.pending_count=0;
+                    this.failure_count=0;
+                    this.success_count=0;
+                    this.off_shelf_count=0;
+                    this.on_shelf_count=0;
+                    this.disable_count=0;
+                    this.original=0;
+                    this.crawl=0;
+                    this.overseas=0;
+                    this.important=0;
+                    this.library=0;
+                    this.others=0;
+            },
             open_modal()
             {
                 this.status='Added';
+                this.pending_count=0;
+                    this.failure_count=0;
+                    this.success_count=0;
+                    this.off_shelf_count=0;
+                    this.on_shelf_count=0;
+                    this.disable_count=0;
+                    this.original=0;
+                    this.crawl=0;
+                    this.overseas=0;
+                    this.important=0;
+                    this.library=0;
+                    this.others=0;
                 this.add_product={
                         'id':'',
                         'title':'',
@@ -988,9 +1278,9 @@
                         'extra_field3':'',
                         'extra_field4':'',
                         'extra_field5':'',
-                        'approval_status':false,
-                        'shelf_status':false,
-                        'product_type':false,
+                        'approval_status':1,
+                        'shelf_status':1,
+                        'product_type':1,
                 },
                     this.images=[];
                 $('#exampleModal').modal('toggle');
@@ -1012,6 +1302,9 @@
     .modal {
         overflow-y: scroll; /*default*/
         overflow-y: auto;
+    }
+    .modal-open{
+        overflow: scroll;
     }
 
 

@@ -7,6 +7,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Hash as PassHash;
 
 class UserController extends Controller
 {
@@ -38,6 +39,12 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+       $validator= $request->validate([
+           'username'=>'unique:users',
+           'email'=>'unique:users',
+        ]);
+       //return $validator;
+
         if (!empty($request->add_user['id'])) {
             $user= User::find($request->add_user['id']);
         } else {
@@ -160,13 +167,37 @@ class UserController extends Controller
     public function update_password(Request $request)
     {
         $password=$request->password;
+        $old_password=$request->old_password;
         $confirm_password=$request->confirm_password;
         $user_id=$request->user['id'];
+        $user_info=User::where('id',$user_id)->first();
 
+        if (!(PassHash::check($request->old_password, \Auth::user()->password))) {
+            return response()->json('error',200);
+        }
         User::where('id',$user_id)->update([
            'password'=>Hash::make($password),
         ]);
 
+        return response()->json('success',200);
+    }
+
+    public function update_profile()
+    {
+        return view('users.profile_view');
+    }
+    public function update_profile_view(Request $request)
+    {
+        //return $request;
+        $validator= $request->validate([
+            'username'=>'unique:users',
+            'email'=>'unique:users',
+        ]);
+
+        User::where('id',$request->user_id)->update([
+           'username'=>$request->username,
+           'email'=>$request->email,
+        ]);
         return response()->json('success',200);
     }
 }

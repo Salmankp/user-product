@@ -284,42 +284,45 @@
 
                 if(flag) {
                     let self = this;
-                    self.product_datatable.destroy();
                     axios.post('/add/user', {
                         add_user: this.add_user,
                         user: this.user,
                     }).then((response) => {
-                        swal({
-                            title: "Success",
-                            text: "User Successfully "+this.status,
-                            icon: "success",
-                        });
-                        this.data = response.data;
-                        $(document).ready(function () {
-                            self.product_datatable = $('#ajax-datatable').DataTable({
-                                language: {
-                                    search: "_INPUT_",
-                                    searchPlaceholder: "Search records",
-                                },
-                                "fnDrawCallback":function(){
-                                    $("input[type='search']").attr("id", "searchBox");
-                                    $('#searchBox').css("width", "200px");
-                                    $('.dataTables_filter').css("float", "right");
-                                }
-                            });
-                        });
+                        if(response.data) {
+                                self.product_datatable.destroy();
+                                swal({
+                                    title: "Success",
+                                    text: "User Successfully " + this.status,
+                                    icon: "success",
+                                });
+                                this.data = response.data;
+                                $(document).ready(function () {
+                                    self.product_datatable = $('#ajax-datatable').DataTable({
+                                        language: {
+                                            search: "_INPUT_",
+                                            searchPlaceholder: "Search records",
+                                        },
+                                        "fnDrawCallback": function () {
+                                            $("input[type='search']").attr("id", "searchBox");
+                                            $('#searchBox').css("width", "200px");
+                                            $('.dataTables_filter').css("float", "right");
+                                        }
+                                    });
+                                });
 
+                            $('#exampleModal').toggle();
+                            $('#exampleModal').removeClass('.modal-backdrop.show');
+                            }
                     }).catch(error => {
                         if(error) {
                             swal({
                                 title: "Failed",
-                                text: "Email Format Invalid",
-                                icon: "warning",
+                                text: "Email or Username Already Exists",
+                                icon: "error",
                             });
                         }
                     });
-                    $('#exampleModal').toggle();
-                    $('#exampleModal').removeClass('.modal-backdrop.show');
+
                 }
             },
             delete_user(id)

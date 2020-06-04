@@ -45,7 +45,7 @@
     <script src="{{ asset('assets/js/scripts.js') }}"></script>
 
 </head>
-<body>
+<body style="overflow: scroll">
 
 {{--        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">--}}
 {{--            <div class="container">--}}

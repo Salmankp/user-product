@@ -1,6 +1,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <img src="{{ asset('assets/img/logo-dark.png') }}" alt="" height="40px" width="150px"/>
+{{--    <img src="{{ asset('assets/img/logo-dark.png') }}" alt="" height="40px" width="150px"/>--}}
+    <h2 style="color: #fff">Logo</h2>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -50,6 +51,8 @@
                     </div>
 
 
+                    <a class="dropdown-item" href="{{route('update_profile')}}"><i class="fa fa-user"></i> Update Profile</a>
+                    <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="{{route('change_password')}}"><i class=" ti-lock"></i> Change Password</a>
 
                     <div class="dropdown-divider"></div>
