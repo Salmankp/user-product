@@ -10,14 +10,14 @@
             <div class="card-body">
                 <div class="row">
                     <div class=" col-md-12">
-                        <div class="card card-shadow mb-4">
+                        <div class="card card-shadow mt-1">
                             <div class="card-header">
                                 <div class="card-title text-center">
                                     <b style="font-size:22px">Products Detail</b>
                                 </div>
-                                <div class="row mt-4 mb-4">
+                                <div class="row mt-1 mt-1">
 
-                                    <div class="col-md-2"></div>
+<!--                                    <div class="col-md-2"></div>-->
 
                                     <div class="col-md-2">
                                         <select class="form-control valid" aria-invalid="false" v-model="search_category">
@@ -36,12 +36,6 @@
                                                 {{data.username}}</option>
                                         </select>
                                     </div>
-                                </div>
-
-                                <div class="row mt-4 mb-4">
-
-                                   <div class="col-md-2"></div>
-
                                     <div class="col-md-2">
                                         <select class="form-control valid" aria-invalid="false" v-model="search_shelf">
                                             <option value="" disabled selected>Select Shelf Status</option>
@@ -69,49 +63,53 @@
                                             <option value="6">other</option>
                                         </select>
                                     </div>
-                                    <div class="col-md-2">
-                                        <button @click="search" class="btn btn-info text-left">Search</button>
-                                        <button @click="reset_filter()" class="btn btn-danger text-right">Reset</button>
+                                </div>
+
+                                <div class="row mt-1 mt-2">
+
+                                    <div class="col-md-2 offset-md-10">
+                                        <button @click="search" class="btn btn-sm btn-info text-left ml-5 mr-2">Search</button>
+                                        <button @click="reset_filter()" class="btn btn-sm btn-danger text-right">Reset</button>
                                     </div>
                                 </div>
 
-                                <div class="row mt-4 mb-4">
-                                    <div class="col-2"></div>
+                                <div class="row mt-1 mt-2 px-4">
 
-                                    <h6>Approval status</h6>
-                                    &nbsp;&nbsp;&nbsp;
-                                    <button class="btn btn-primary btn-sm">All {{(
-                                        pending_count+failure_count+success_count)}}</button>&nbsp;&nbsp;
-                                    <button class="btn btn-primary btn-sm">pending {{(pending_count)}}</button>&nbsp;&nbsp;
-                                    <button class="btn btn-primary btn-sm">failure {{(failure_count)}}</button>&nbsp;&nbsp;
-                                    <button class="btn btn-primary btn-sm">success {{(success_count)}}</button>
+
+                                    <h6><strong>Shelf status: </strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h6>
+
+                                    <span class="badge badge-info pt-2 mx-1">All {{(off_shelf_count+on_shelf_count+disable_count)}}</span>
+                                    <span class="badge badge-info pt-2 mx-1">Off shelf {{(off_shelf_count)}}</span>
+                                    <span class="badge badge-info pt-2 mx-1">On shelf {{(on_shelf_count)}}</span>
+                                    <span class="badge badge-info pt-2 mx-1">Disable {{(disable_count)}}</span>
+                                </div>
+                                <div class="row mt-1 mt-1 px-4">
+
+
+                                    <h6><strong>Product Type:</strong> &nbsp;&nbsp;&nbsp;</h6>
+
+                                    <span class="badge badge-info pt-2 mx-1">All
+                                        {{(original+crawl+overseas+important+library+others)}}</span>
+                                    <span class="badge badge-info pt-2 mx-1">
+                                      Original {{(original)}}</span>
+                                    <span class="badge badge-info pt-2 mx-1">Crawl {{(crawl)}}</span>
+                                    <span class="badge badge-info pt-2 mx-1">Overseas {{(overseas)}}</span>
+                                    <span class="badge badge-info pt-2 mx-1">Important {{(important)}}</span>
+                                    <span class="badge badge-info pt-2 mx-1">Library {{(library)}}</span>
+                                    <span class="badge badge-info pt-2 mx-1">Others {{(others)}}</span>
+                                </div>
+                                <div class="row mt-1 mt-1 px-4">
+
+
+                                    <h6><strong>Approval status: </strong> </h6>
+
+                                    <span class="badge badge-info pt-2 mx-1">All {{(
+                                        pending_count+failure_count+success_count)}}</span>
+                                    <span class="badge badge-info pt-2 mx-1">pending {{(pending_count)}}</span>
+                                    <span class="badge badge-info pt-2 mx-1">failure {{(failure_count)}}</span>
+                                    <span class="badge badge-info pt-2 mx-1">success {{(success_count)}}</span>
                                 </div>
 
-                                <div class="row mt-4 mb-4">
-                                    <div class="col-2"></div>
-
-                                    <h6>Shelf status</h6>
-                                    &nbsp;&nbsp;&nbsp;
-                                    <button class="btn btn-primary btn-sm">All {{(off_shelf_count+on_shelf_count+disable_count)}}</button>&nbsp;&nbsp;
-                                    <button class="btn btn-primary btn-sm">Off shelf {{(off_shelf_count)}}</button>&nbsp;&nbsp;
-                                    <button class="btn btn-primary btn-sm">On shelf {{(on_shelf_count)}}</button>&nbsp;&nbsp;
-                                    <button class="btn btn-primary btn-sm">Disable {{(disable_count)}}</button>
-                                </div>
-                                <div class="row mt-4 mb-4">
-                                    <div class="col-2"></div>
-
-                                    <h6>Product Type</h6>
-                                    &nbsp;&nbsp;&nbsp;
-                                    <button class="btn btn-primary btn-sm">All
-                                        {{(original+crawl+overseas+important+library+others)}}</button>&nbsp;&nbsp;
-                                    <button class="btn btn-primary btn-sm">
-                                      Original {{(original)}}</button>&nbsp;&nbsp;
-                                    <button class="btn btn-primary btn-sm">Crawl {{(crawl)}}</button>&nbsp;&nbsp;
-                                    <button class="btn btn-primary btn-sm">Overseas {{(overseas)}}</button>&nbsp;&nbsp;
-                                    <button class="btn btn-primary btn-sm">Important {{(important)}}</button>&nbsp;&nbsp;
-                                    <button class="btn btn-primary btn-sm">Library {{(library)}}</button>&nbsp;&nbsp;
-                                    <button class="btn btn-primary btn-sm">Others {{(others)}}</button>
-                                </div>
 
                             </div>
                             <div class="card-body">
