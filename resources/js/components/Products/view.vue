@@ -13,7 +13,7 @@
                         <div class="card card-shadow mt-1">
                             <div class="card-header">
                                 <div class="card-title text-center">
-                                    <b style="font-size:22px">Products Detail</b>
+                                    <b style="font-size:22px">Products Details</b>
                                 </div>
                                 <div class="row mt-1 mt-1">
 
