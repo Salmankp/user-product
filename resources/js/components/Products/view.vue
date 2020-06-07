@@ -120,7 +120,8 @@
                                                style="width: 100%;" role="grid" aria-describedby="ajax-datatable_info">
                                     <thead>
                                     <tr role="row">
-                                        <th class="sorting_asc" tabindex="0" aria-controls="ajax-datatable" rowspan="1" colspan="1" aria-label="Name: activate to sort column descending" aria-sort="ascending" style="width: 144px;">Image</th>
+                                        <th class="sorting" tabindex="0" aria-controls="ajax-datatable" rowspan="1" colspan="1" aria-label="Name: activate to sort column descending" aria-sort="ascending" style="width: 144px;">ID</th>
+                                        <th class="sorting" tabindex="0" aria-controls="ajax-datatable" rowspan="1" colspan="1" aria-label="Name: activate to sort column descending" aria-sort="ascending" style="width: 144px;">Image</th>
                                         <th class="sorting" tabindex="0" aria-controls="ajax-datatable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 221px;">Category Name</th>
                                         <th class="sorting" tabindex="0" aria-controls="ajax-datatable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 221px;">Title</th>
                                         <th class="sorting" tabindex="0" aria-controls="ajax-datatable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 105px;">Internal SKU</th>
@@ -132,7 +133,9 @@
                                     </tr>
                                     </thead>
                                     <tfoot>
-                                    <tr><th rowspan="1" colspan="1">Image</th>
+                                    <tr>
+                                        <th rowspan="1" colspan="1">ID</th>
+                                        <th rowspan="1" colspan="1">Image</th>
                                         <th rowspan="1" colspan="1">Category Name</th>
                                         <th rowspan="1" colspan="1">Title</th>
                                         <th rowspan="1" colspan="1">Internal SKU</th>
@@ -144,7 +147,10 @@
                                     </tr>
                                     </tfoot>
                                     <tbody>
-                                    <tr role="row" class="odd" v-for="detail in data">
+                                    <tr role="row" class="odd" v-for="(detail , index) in data">
+                                        <td>
+                                            {{index+1}}
+                                        </td>
                                         <td class="sorting_1" v-if="detail.product_image==null">
                                             <p>No Image</p>
                                         </td>
@@ -664,6 +670,7 @@
                     jQuery.noConflict();
                         $(document).ready(function () {
                             self.product_datatable=$('#ajax-datatable').DataTable({
+                                "order": [[ 0, "desc" ]],
                                 language: {
                                     search: "_INPUT_",
                                     searchPlaceholder: "Search records",
@@ -765,6 +772,7 @@
                     }).then((response) => {
                         $(document).ready(function () {
                             self.product_datatable = $('#ajax-datatable').DataTable({
+                                "order": [[ 0, "desc" ]],
                                 language: {
                                     search: "_INPUT_",
                                     searchPlaceholder: "Search records",
@@ -798,6 +806,7 @@
                         jQuery.noConflict();
                         $(document).ready(function () {
                             self.product_datatable=$('#ajax-datatable').DataTable({
+                                "order": [[ 0, "desc" ]],
                                 language: {
                                     search: "_INPUT_",
                                     searchPlaceholder: "Search records",
@@ -1006,6 +1015,7 @@
                         });
                         $(document).ready(function () {
                             self.product_datatable = $('#ajax-datatable').DataTable({
+                                "order": [[ 0, "desc" ]],
                                 language: {
                                     search: "_INPUT_",
                                     searchPlaceholder: "Search records",
@@ -1100,6 +1110,7 @@
                                 this.reset_value();
                                 $(document).ready(function () {
                                     self.product_datatable = $('#ajax-datatable').DataTable({
+                                        "order": [[ 0, "desc" ]],
                                         language: {
                                             search: "_INPUT_",
                                             searchPlaceholder: "Search records",

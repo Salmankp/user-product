@@ -21,7 +21,8 @@
                                 <div class="row"><div class="col-sm-12"><table id="ajax-datatable" class="display table table-bordered table-striped dataTable" style="width: 100%;" role="grid" aria-describedby="ajax-datatable_info">
                                     <thead>
                                     <tr role="row">
-                                        <th class="sorting_asc" tabindex="0" aria-controls="ajax-datatable" rowspan="1" colspan="1" aria-label="Name: activate to sort column descending" aria-sort="ascending" style="width: 144px;">Name</th>
+                                        <th class="sorting" tabindex="0" aria-controls="ajax-datatable" rowspan="1" colspan="1" aria-label="Name: activate to sort column descending" aria-sort="ascending" style="width: 144px;">ID</th>
+                                        <th class="sorting" tabindex="0" aria-controls="ajax-datatable" rowspan="1" colspan="1" aria-label="Name: activate to sort column descending" aria-sort="ascending" style="width: 144px;">Name</th>
                                         <th class="sorting" tabindex="0" aria-controls="ajax-datatable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 221px;">Email</th>
                                         <th class="sorting" tabindex="0" aria-controls="ajax-datatable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 105px;">Username</th>
                                         <th class="sorting" tabindex="0" aria-controls="ajax-datatable" rowspan="1" colspan="1" aria-label="Extn.: activate to sort column ascending" style="width: 49px;">Status</th>
@@ -30,7 +31,9 @@
                                     </tr>
                                     </thead>
                                     <tfoot>
-                                    <tr><th rowspan="1" colspan="1">Name</th>
+                                    <tr>
+                                        <th rowspan="1" colspan="1">ID</th>
+                                        <th rowspan="1" colspan="1">Name</th>
                                         <th rowspan="1" colspan="1">Email</th>
                                         <th rowspan="1" colspan="1">Username</th>
                                         <th rowspan="1" colspan="1">Status</th>
@@ -39,7 +42,8 @@
                                     </tr>
                                     </tfoot>
                                     <tbody>
-                                    <tr role="row" class="odd" v-for="user in data">
+                                    <tr role="row" class="odd" v-for="(user, index) in data">
+                                        <td class="sorting_1">{{index+1}}</td>
                                         <td class="sorting_1">{{user.name}}</td>
                                         <td>{{user.email}}</td>
                                         <td>{{user.username}}</td>
@@ -106,17 +110,27 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Role</label>
-                                        <select class="form-control valid" aria-invalid="false" v-model="add_user.role">
+                                        <select class="form-control valid" aria-invalid="false" v-on:change="get_master_users()" v-model="add_user.role">
                                             <option value="" selected>Select Role</option>
                                             <option value="Master User" v-if="user.role=='admin'">Master User</option>
                                             <option value="Child User">Child User</option>
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4" v-if="user.role=='admin' && add_user.role=='Child User'">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Select Master</label>
+                                        <select class="form-control valid" aria-invalid="false"
+                                                v-model="add_user.master_user_id">
+                                            <option value="">Select Role</option>
+                                            <option :value=data.id v-for="data in master_users">{{data.name}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Status</label>
                                         <select class="form-control valid" aria-invalid="false" v-model="add_user.status">
@@ -164,8 +178,10 @@
         props:['user'],
         data() {
             return {
+                master_users:[],
                 add_user:{
                     'id':'',
+                    'master_user_id': '',
                     'name':'',
                     'username':'',
                     'email':'',
@@ -183,7 +199,11 @@
             }
         },
         created() {
-
+                if(this.user.role=='admin'){
+                        axios.get('/get/master/users', {}).then((response) => {
+                            this.master_users = response.data;
+                        });
+                }
         },
         mounted() {
             console.log(this.user);
@@ -199,6 +219,7 @@
                     jQuery.noConflict();
                     $(document).ready(function () {
                         self.product_datatable=$('#ajax-datatable').DataTable({
+                            "order": [[ 0, "desc" ]],
                             language: {
                                 search: "_INPUT_",
                                 searchPlaceholder: "Search records",
@@ -216,6 +237,8 @@
 
         },
         methods:{
+
+
 
             submit_user()
             {
@@ -281,6 +304,15 @@
                         icon: "warning",
                     });
                 }
+                if(this.add_user.role == 'Child User' && (this.user.role=='admin' && this.add_user.master_user_id==''))
+                {
+                    flag=false;
+                    return swal({
+                        title: "Master User is Required",
+                        text: "Please Select master user",
+                        icon: "warning",
+                    });
+                }
 
                 if(flag) {
                     let self = this;
@@ -298,6 +330,7 @@
                                 this.data = response.data;
                                 $(document).ready(function () {
                                     self.product_datatable = $('#ajax-datatable').DataTable({
+                                        "order": [[ 0, "desc" ]],
                                         language: {
                                             search: "_INPUT_",
                                             searchPlaceholder: "Search records",
@@ -344,6 +377,7 @@
                             if (response.data) {
                                 $(document).ready(function () {
                                     self.product_datatable = $('#ajax-datatable').DataTable({
+                                        "order": [[ 0, "desc" ]],
                                         language: {
                                             search: "_INPUT_",
                                             searchPlaceholder: "Search records",
@@ -368,6 +402,7 @@
                 this.status='Updated';
                 axios.get('/edit/user/'+id).then((response) => {
                     this.add_user.id=response.data.id;
+                    this.add_user.master_user_id=response.data.created_by;
                     this.add_user.name=response.data.name;
                     this.add_user.username=response.data.username;
                     this.add_user.email=response.data.email;
@@ -386,6 +421,7 @@
                 this.status='Added';
                 this.add_user={
                         'id':'',
+                        'master_user_id':'',
                         'name':'',
                         'username':'',
                         'email':'',

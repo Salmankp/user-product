@@ -55,7 +55,13 @@ class UserController extends Controller
         $user->username=$request->add_user['username'];
         $user->role=$request->add_user['role'];
         $user->status=$request->add_user['status'];
-        $user->created_by=Auth::id();
+        if(Auth::user()->hasRole('Admin')){
+            $user->created_by = $request->add_user['master_user_id'];
+        }
+        else{
+            $user->created_by=Auth::id();
+        }
+
         $user->email=$request->add_user['email'];
         $user->password=Hash::make($request->add_user['password']);
         $user->extra_field_1=$request->add_user['field1'];
@@ -199,5 +205,10 @@ class UserController extends Controller
            'email'=>$request->email,
         ]);
         return response()->json('success',200);
+    }
+
+    public function getMasterUsers(){
+       $master_users =  User::where('role','like', '%'.'Master User'.'%')->get();
+        return response()->json($master_users,200);
     }
 }

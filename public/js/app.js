@@ -1994,6 +1994,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "view.vue",
   props: ['user'],
@@ -2023,6 +2027,7 @@ __webpack_require__.r(__webpack_exports__);
         jQuery.noConflict();
         $(document).ready(function () {
           self.product_datatable = $('#ajax-datatable').DataTable({
+            "order": [[0, "desc"]],
             language: {
               search: "_INPUT_",
               searchPlaceholder: "Search records"
@@ -2068,6 +2073,7 @@ __webpack_require__.r(__webpack_exports__);
           _this2.data = response.data;
           $(document).ready(function () {
             self.product_datatable = $('#ajax-datatable').DataTable({
+              "order": [[0, "desc"]],
               language: {
                 search: "_INPUT_",
                 searchPlaceholder: "Search records"
@@ -2104,6 +2110,7 @@ __webpack_require__.r(__webpack_exports__);
             if (response.data) {
               $(document).ready(function () {
                 self.product_datatable = $('#ajax-datatable').DataTable({
+                  "order": [[0, "desc"]],
                   language: {
                     search: "_INPUT_",
                     searchPlaceholder: "Search records"
@@ -2186,6 +2193,10 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
 //
 //
 //
@@ -2847,6 +2858,7 @@ __webpack_require__.r(__webpack_exports__);
         jQuery.noConflict();
         $(document).ready(function () {
           self.product_datatable = $('#ajax-datatable').DataTable({
+            "order": [[0, "desc"]],
             language: {
               search: "_INPUT_",
               searchPlaceholder: "Search records"
@@ -2958,6 +2970,7 @@ __webpack_require__.r(__webpack_exports__);
         }).then(function (response) {
           $(document).ready(function () {
             self.product_datatable = $('#ajax-datatable').DataTable({
+              "order": [[0, "desc"]],
               language: {
                 search: "_INPUT_",
                 searchPlaceholder: "Search records"
@@ -2991,6 +3004,7 @@ __webpack_require__.r(__webpack_exports__);
           jQuery.noConflict();
           $(document).ready(function () {
             self.product_datatable = $('#ajax-datatable').DataTable({
+              "order": [[0, "desc"]],
               language: {
                 search: "_INPUT_",
                 searchPlaceholder: "Search records"
@@ -3226,6 +3240,7 @@ __webpack_require__.r(__webpack_exports__);
           });
           $(document).ready(function () {
             self.product_datatable = $('#ajax-datatable').DataTable({
+              "order": [[0, "desc"]],
               language: {
                 search: "_INPUT_",
                 searchPlaceholder: "Search records"
@@ -3337,6 +3352,7 @@ __webpack_require__.r(__webpack_exports__);
 
               $(document).ready(function () {
                 self.product_datatable = $('#ajax-datatable').DataTable({
+                  "order": [[0, "desc"]],
                   language: {
                     search: "_INPUT_",
                     searchPlaceholder: "Search records"
@@ -3970,13 +3986,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "view.vue",
   props: ['user'],
   data: function data() {
     return {
+      master_users: [],
       add_user: {
         'id': '',
+        'master_user_id': '',
         'name': '',
         'username': '',
         'email': '',
@@ -3993,9 +4025,17 @@ __webpack_require__.r(__webpack_exports__);
       status: ''
     };
   },
-  created: function created() {},
-  mounted: function mounted() {
+  created: function created() {
     var _this = this;
+
+    if (this.user.role == 'admin') {
+      axios.get('/get/master/users', {}).then(function (response) {
+        _this.master_users = response.data;
+      });
+    }
+  },
+  mounted: function mounted() {
+    var _this2 = this;
 
     console.log(this.user);
     var self = this;
@@ -4008,6 +4048,7 @@ __webpack_require__.r(__webpack_exports__);
         jQuery.noConflict();
         $(document).ready(function () {
           self.product_datatable = $('#ajax-datatable').DataTable({
+            "order": [[0, "desc"]],
             language: {
               search: "_INPUT_",
               searchPlaceholder: "Search records"
@@ -4020,12 +4061,12 @@ __webpack_require__.r(__webpack_exports__);
           });
         });
       }, 600);
-      _this.data = response.data;
+      _this2.data = response.data;
     });
   },
   methods: {
     submit_user: function submit_user() {
-      var _this2 = this;
+      var _this3 = this;
 
       var flag = true;
 
@@ -4092,6 +4133,15 @@ __webpack_require__.r(__webpack_exports__);
         });
       }
 
+      if (this.add_user.role == 'Child User' && this.user.role == 'admin' && this.add_user.master_user_id == '') {
+        flag = false;
+        return swal({
+          title: "Master User is Required",
+          text: "Please Select master user",
+          icon: "warning"
+        });
+      }
+
       if (flag) {
         var self = this;
         axios.post('/add/user', {
@@ -4102,12 +4152,13 @@ __webpack_require__.r(__webpack_exports__);
             self.product_datatable.destroy();
             swal({
               title: "Success",
-              text: "User Successfully " + _this2.status,
+              text: "User Successfully " + _this3.status,
               icon: "success"
             });
-            _this2.data = response.data;
+            _this3.data = response.data;
             $(document).ready(function () {
               self.product_datatable = $('#ajax-datatable').DataTable({
+                "order": [[0, "desc"]],
                 language: {
                   search: "_INPUT_",
                   searchPlaceholder: "Search records"
@@ -4134,7 +4185,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     delete_user: function delete_user(id) {
-      var _this3 = this;
+      var _this4 = this;
 
       var self = this;
       swal({
@@ -4153,6 +4204,7 @@ __webpack_require__.r(__webpack_exports__);
             if (response.data) {
               $(document).ready(function () {
                 self.product_datatable = $('#ajax-datatable').DataTable({
+                  "order": [[0, "desc"]],
                   language: {
                     search: "_INPUT_",
                     searchPlaceholder: "Search records"
@@ -4164,26 +4216,27 @@ __webpack_require__.r(__webpack_exports__);
                   }
                 });
               });
-              _this3.data = response.data;
+              _this4.data = response.data;
             }
           });
         }
       });
     },
     edit_user: function edit_user(id) {
-      var _this4 = this;
+      var _this5 = this;
 
       this.status = 'Updated';
       axios.get('/edit/user/' + id).then(function (response) {
-        _this4.add_user.id = response.data.id;
-        _this4.add_user.name = response.data.name;
-        _this4.add_user.username = response.data.username;
-        _this4.add_user.email = response.data.email;
-        _this4.add_user.role = response.data.role;
-        _this4.add_user.status = response.data.status;
-        _this4.add_user.field1 = response.data.extra_field_1;
-        _this4.add_user.field2 = response.data.extra_field_2;
-        _this4.add_user.field3 = response.data.extra_field_3;
+        _this5.add_user.id = response.data.id;
+        _this5.add_user.master_user_id = response.data.created_by;
+        _this5.add_user.name = response.data.name;
+        _this5.add_user.username = response.data.username;
+        _this5.add_user.email = response.data.email;
+        _this5.add_user.role = response.data.role;
+        _this5.add_user.status = response.data.status;
+        _this5.add_user.field1 = response.data.extra_field_1;
+        _this5.add_user.field2 = response.data.extra_field_2;
+        _this5.add_user.field3 = response.data.extra_field_3;
         $('#exampleModal').modal('toggle');
       });
     },
@@ -4192,6 +4245,7 @@ __webpack_require__.r(__webpack_exports__);
       this.status = 'Added';
       this.add_user = {
         'id': '',
+        'master_user_id': '',
         'name': '',
         'username': '',
         'email': '',
@@ -40554,12 +40608,14 @@ var render = function() {
                           _vm._v(" "),
                           _c(
                             "tbody",
-                            _vm._l(_vm.data, function(category) {
+                            _vm._l(_vm.data, function(category, index) {
                               return _c(
                                 "tr",
                                 { staticClass: "odd", attrs: { role: "row" } },
                                 [
-                                  _c("td", { staticClass: "sorting_1" }, [
+                                  _c("td", {}, [_vm._v(_vm._s(index + 1))]),
+                                  _vm._v(" "),
+                                  _c("td", {}, [
                                     _vm._v(_vm._s(category.title))
                                   ]),
                                   _vm._v(" "),
@@ -40761,7 +40817,24 @@ var staticRenderFns = [
         _c(
           "th",
           {
-            staticClass: "sorting_asc",
+            staticClass: "sorting",
+            staticStyle: { width: "144px" },
+            attrs: {
+              tabindex: "0",
+              "aria-controls": "ajax-datatable",
+              rowspan: "1",
+              colspan: "1",
+              "aria-label": "Name: activate to sort column descending",
+              "aria-sort": "ascending"
+            }
+          },
+          [_vm._v("ID")]
+        ),
+        _vm._v(" "),
+        _c(
+          "th",
+          {
+            staticClass: "sorting",
             staticStyle: { width: "144px" },
             attrs: {
               tabindex: "0",
@@ -40799,6 +40872,8 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("tfoot", [
       _c("tr", [
+        _c("th", { attrs: { rowspan: "1", colspan: "1" } }, [_vm._v("ID")]),
+        _vm._v(" "),
         _c("th", { attrs: { rowspan: "1", colspan: "1" } }, [_vm._v("Name")]),
         _vm._v(" "),
         _c(
@@ -40927,20 +41002,18 @@ var render = function() {
             }
           }
         },
-        [_vm._v("\n            Add Product\n        ")]
+        [_vm._v("\n                Add Product\n            ")]
       )
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "card-body" }, [
       _c("div", { staticClass: "row" }, [
         _c("div", { staticClass: " col-md-12" }, [
-          _c("div", { staticClass: "card card-shadow mb-4" }, [
+          _c("div", { staticClass: "card card-shadow mt-1" }, [
             _c("div", { staticClass: "card-header" }, [
               _vm._m(0),
               _vm._v(" "),
-              _c("div", { staticClass: "row mt-4 mb-4" }, [
-                _c("div", { staticClass: "col-md-2" }),
-                _vm._v(" "),
+              _c("div", { staticClass: "row mt-1 mt-1" }, [
                 _c("div", { staticClass: "col-md-2" }, [
                   _c(
                     "select",
@@ -40987,7 +41060,7 @@ var render = function() {
                           },
                           [
                             _vm._v(
-                              "\n                                            " +
+                              "\n                                                " +
                                 _vm._s(data.title)
                             )
                           ]
@@ -41071,7 +41144,7 @@ var render = function() {
                               },
                               [
                                 _vm._v(
-                                  "\n                                            " +
+                                  "\n                                                " +
                                     _vm._s(data.username)
                                 )
                               ]
@@ -41081,11 +41154,7 @@ var render = function() {
                         2
                       )
                     ])
-                  : _vm._e()
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "row mt-4 mb-4" }, [
-                _c("div", { staticClass: "col-md-2" }),
+                  : _vm._e(),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-md-2" }, [
                   _c(
@@ -41249,13 +41318,15 @@ var render = function() {
                       _c("option", { attrs: { value: "6" } }, [_vm._v("other")])
                     ]
                   )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-2" }, [
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "row mt-1 mt-2" }, [
+                _c("div", { staticClass: "col-md-2 offset-md-10" }, [
                   _c(
                     "button",
                     {
-                      staticClass: "btn btn-info text-left",
+                      staticClass: "btn btn-sm btn-info text-left ml-5 mr-2",
                       on: { click: _vm.search }
                     },
                     [_vm._v("Search")]
@@ -41264,7 +41335,7 @@ var render = function() {
                   _c(
                     "button",
                     {
-                      staticClass: "btn btn-danger text-right",
+                      staticClass: "btn btn-sm btn-danger text-right",
                       on: {
                         click: function($event) {
                           return _vm.reset_filter()
@@ -41276,45 +41347,10 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "row mt-4 mb-4" }, [
-                _c("div", { staticClass: "col-2" }),
+              _c("div", { staticClass: "row mt-1 mt-2 px-4" }, [
+                _vm._m(1),
                 _vm._v(" "),
-                _c("h6", [_vm._v("Approval status")]),
-                _vm._v(
-                  "\n                                   \n                                "
-                ),
-                _c("button", { staticClass: "btn btn-primary btn-sm" }, [
-                  _vm._v(
-                    "All " +
-                      _vm._s(
-                        _vm.pending_count +
-                          _vm.failure_count +
-                          _vm.success_count
-                      )
-                  )
-                ]),
-                _vm._v("  \n                                "),
-                _c("button", { staticClass: "btn btn-primary btn-sm" }, [
-                  _vm._v("pending " + _vm._s(_vm.pending_count))
-                ]),
-                _vm._v("  \n                                "),
-                _c("button", { staticClass: "btn btn-primary btn-sm" }, [
-                  _vm._v("failure " + _vm._s(_vm.failure_count))
-                ]),
-                _vm._v("  \n                                "),
-                _c("button", { staticClass: "btn btn-primary btn-sm" }, [
-                  _vm._v("success " + _vm._s(_vm.success_count))
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "row mt-4 mb-4" }, [
-                _c("div", { staticClass: "col-2" }),
-                _vm._v(" "),
-                _c("h6", [_vm._v("Shelf status")]),
-                _vm._v(
-                  "\n                                   \n                                "
-                ),
-                _c("button", { staticClass: "btn btn-primary btn-sm" }, [
+                _c("span", { staticClass: "badge badge-info pt-2 mx-1" }, [
                   _vm._v(
                     "All " +
                       _vm._s(
@@ -41324,30 +41360,26 @@ var render = function() {
                       )
                   )
                 ]),
-                _vm._v("  \n                                "),
-                _c("button", { staticClass: "btn btn-primary btn-sm" }, [
+                _vm._v(" "),
+                _c("span", { staticClass: "badge badge-info pt-2 mx-1" }, [
                   _vm._v("Off shelf " + _vm._s(_vm.off_shelf_count))
                 ]),
-                _vm._v("  \n                                "),
-                _c("button", { staticClass: "btn btn-primary btn-sm" }, [
+                _vm._v(" "),
+                _c("span", { staticClass: "badge badge-info pt-2 mx-1" }, [
                   _vm._v("On shelf " + _vm._s(_vm.on_shelf_count))
                 ]),
-                _vm._v("  \n                                "),
-                _c("button", { staticClass: "btn btn-primary btn-sm" }, [
+                _vm._v(" "),
+                _c("span", { staticClass: "badge badge-info pt-2 mx-1" }, [
                   _vm._v("Disable " + _vm._s(_vm.disable_count))
                 ])
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "row mt-4 mb-4" }, [
-                _c("div", { staticClass: "col-2" }),
+              _c("div", { staticClass: "row mt-1 mt-1 px-4" }, [
+                _vm._m(2),
                 _vm._v(" "),
-                _c("h6", [_vm._v("Product Type")]),
-                _vm._v(
-                  "\n                                   \n                                "
-                ),
-                _c("button", { staticClass: "btn btn-primary btn-sm" }, [
+                _c("span", { staticClass: "badge badge-info pt-2 mx-1" }, [
                   _vm._v(
-                    "All\n                                    " +
+                    "All\n                                        " +
                       _vm._s(
                         _vm.original +
                           _vm.crawl +
@@ -41358,32 +41390,59 @@ var render = function() {
                       )
                   )
                 ]),
-                _vm._v("  \n                                "),
-                _c("button", { staticClass: "btn btn-primary btn-sm" }, [
+                _vm._v(" "),
+                _c("span", { staticClass: "badge badge-info pt-2 mx-1" }, [
                   _vm._v(
-                    "\n                                  Original " +
+                    "\n                                      Original " +
                       _vm._s(_vm.original)
                   )
                 ]),
-                _vm._v("  \n                                "),
-                _c("button", { staticClass: "btn btn-primary btn-sm" }, [
+                _vm._v(" "),
+                _c("span", { staticClass: "badge badge-info pt-2 mx-1" }, [
                   _vm._v("Crawl " + _vm._s(_vm.crawl))
                 ]),
-                _vm._v("  \n                                "),
-                _c("button", { staticClass: "btn btn-primary btn-sm" }, [
+                _vm._v(" "),
+                _c("span", { staticClass: "badge badge-info pt-2 mx-1" }, [
                   _vm._v("Overseas " + _vm._s(_vm.overseas))
                 ]),
-                _vm._v("  \n                                "),
-                _c("button", { staticClass: "btn btn-primary btn-sm" }, [
+                _vm._v(" "),
+                _c("span", { staticClass: "badge badge-info pt-2 mx-1" }, [
                   _vm._v("Important " + _vm._s(_vm.important))
                 ]),
-                _vm._v("  \n                                "),
-                _c("button", { staticClass: "btn btn-primary btn-sm" }, [
+                _vm._v(" "),
+                _c("span", { staticClass: "badge badge-info pt-2 mx-1" }, [
                   _vm._v("Library " + _vm._s(_vm.library))
                 ]),
-                _vm._v("  \n                                "),
-                _c("button", { staticClass: "btn btn-primary btn-sm" }, [
+                _vm._v(" "),
+                _c("span", { staticClass: "badge badge-info pt-2 mx-1" }, [
                   _vm._v("Others " + _vm._s(_vm.others))
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "row mt-1 mt-1 px-4" }, [
+                _vm._m(3),
+                _vm._v(" "),
+                _c("span", { staticClass: "badge badge-info pt-2 mx-1" }, [
+                  _vm._v(
+                    "All " +
+                      _vm._s(
+                        _vm.pending_count +
+                          _vm.failure_count +
+                          _vm.success_count
+                      )
+                  )
+                ]),
+                _vm._v(" "),
+                _c("span", { staticClass: "badge badge-info pt-2 mx-1" }, [
+                  _vm._v("pending " + _vm._s(_vm.pending_count))
+                ]),
+                _vm._v(" "),
+                _c("span", { staticClass: "badge badge-info pt-2 mx-1" }, [
+                  _vm._v("failure " + _vm._s(_vm.failure_count))
+                ]),
+                _vm._v(" "),
+                _c("span", { staticClass: "badge badge-info pt-2 mx-1" }, [
+                  _vm._v("success " + _vm._s(_vm.success_count))
                 ])
               ])
             ]),
@@ -41412,17 +41471,25 @@ var render = function() {
                           }
                         },
                         [
-                          _vm._m(1),
+                          _vm._m(4),
                           _vm._v(" "),
-                          _vm._m(2),
+                          _vm._m(5),
                           _vm._v(" "),
                           _c(
                             "tbody",
-                            _vm._l(_vm.data, function(detail) {
+                            _vm._l(_vm.data, function(detail, index) {
                               return _c(
                                 "tr",
                                 { staticClass: "odd", attrs: { role: "row" } },
                                 [
+                                  _c("td", [
+                                    _vm._v(
+                                      "\n                                            " +
+                                        _vm._s(index + 1) +
+                                        "\n                                        "
+                                    )
+                                  ]),
+                                  _vm._v(" "),
                                   detail.product_image == null
                                     ? _c("td", { staticClass: "sorting_1" }, [
                                         _c("p", [_vm._v("No Image")])
@@ -41451,7 +41518,7 @@ var render = function() {
                                   detail.product_type == 1
                                     ? _c("td", [
                                         _vm._v(
-                                          "\n                                      original\n                                    "
+                                          "\n                                          original\n                                        "
                                         )
                                       ])
                                     : _vm._e(),
@@ -41459,7 +41526,7 @@ var render = function() {
                                   detail.product_type == 2
                                     ? _c("td", [
                                         _vm._v(
-                                          "\n                                       crawl\n                                    "
+                                          "\n                                           crawl\n                                        "
                                         )
                                       ])
                                     : _vm._e(),
@@ -41467,7 +41534,7 @@ var render = function() {
                                   detail.product_type == 3
                                     ? _c("td", [
                                         _vm._v(
-                                          "\n                                        overseas\n                                    "
+                                          "\n                                            overseas\n                                        "
                                         )
                                       ])
                                     : _vm._e(),
@@ -41475,7 +41542,7 @@ var render = function() {
                                   detail.product_type == 4
                                     ? _c("td", [
                                         _vm._v(
-                                          "\n                                        important\n                                    "
+                                          "\n                                            important\n                                        "
                                         )
                                       ])
                                     : _vm._e(),
@@ -41483,7 +41550,7 @@ var render = function() {
                                   detail.product_type == 5
                                     ? _c("td", [
                                         _vm._v(
-                                          "\n                                      library\n                                    "
+                                          "\n                                          library\n                                        "
                                         )
                                       ])
                                     : _vm._e(),
@@ -41491,7 +41558,7 @@ var render = function() {
                                   detail.product_type == 6
                                     ? _c("td", [
                                         _vm._v(
-                                          "\n                                       other\n                                    "
+                                          "\n                                           other\n                                        "
                                         )
                                       ])
                                     : _vm._e(),
@@ -41601,7 +41668,7 @@ var render = function() {
                         _vm._v("Update Product")
                       ]),
                   _vm._v(" "),
-                  _vm._m(3)
+                  _vm._m(6)
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "modal-body" }, [
@@ -41777,7 +41844,7 @@ var render = function() {
                                 },
                                 [
                                   _vm._v(
-                                    "\n                                                " +
+                                    "\n                                                    " +
                                       _vm._s(data.title)
                                   )
                                 ]
@@ -42772,7 +42839,7 @@ var render = function() {
                                 },
                                 [
                                   _vm._v(
-                                    "Pending\n                                                "
+                                    "Pending\n                                                    "
                                   ),
                                   _c("input", {
                                     directives: [
@@ -42822,7 +42889,7 @@ var render = function() {
                                 },
                                 [
                                   _vm._v(
-                                    "Fail\n                                                "
+                                    "Fail\n                                                    "
                                   ),
                                   _c("input", {
                                     directives: [
@@ -42872,7 +42939,7 @@ var render = function() {
                                 },
                                 [
                                   _vm._v(
-                                    "Success\n                                                "
+                                    "Success\n                                                    "
                                   ),
                                   _c("input", {
                                     directives: [
@@ -42932,7 +42999,7 @@ var render = function() {
                                 },
                                 [
                                   _vm._v(
-                                    "Off-Shelf\n                                                "
+                                    "Off-Shelf\n                                                    "
                                   ),
                                   _c("input", {
                                     directives: [
@@ -42981,7 +43048,7 @@ var render = function() {
                                 },
                                 [
                                   _vm._v(
-                                    "OnShelf\n                                                "
+                                    "OnShelf\n                                                    "
                                   ),
                                   _c("input", {
                                     directives: [
@@ -43030,7 +43097,7 @@ var render = function() {
                                 },
                                 [
                                   _vm._v(
-                                    "Disabled\n                                                "
+                                    "Disabled\n                                                    "
                                   ),
                                   _c("input", {
                                     directives: [
@@ -43089,7 +43156,7 @@ var render = function() {
                                 },
                                 [
                                   _vm._v(
-                                    "Original\n                                                "
+                                    "Original\n                                                    "
                                   ),
                                   _c("input", {
                                     directives: [
@@ -43138,7 +43205,7 @@ var render = function() {
                                 },
                                 [
                                   _vm._v(
-                                    "Crawl\n                                                "
+                                    "Crawl\n                                                    "
                                   ),
                                   _c("input", {
                                     directives: [
@@ -43187,7 +43254,7 @@ var render = function() {
                                 },
                                 [
                                   _vm._v(
-                                    "Overseas\n                                                "
+                                    "Overseas\n                                                    "
                                   ),
                                   _c("input", {
                                     directives: [
@@ -43236,7 +43303,7 @@ var render = function() {
                                 },
                                 [
                                   _vm._v(
-                                    "Important\n                                                "
+                                    "Important\n                                                    "
                                   ),
                                   _c("input", {
                                     directives: [
@@ -43285,7 +43352,7 @@ var render = function() {
                                 },
                                 [
                                   _vm._v(
-                                    "Library\n                                                "
+                                    "Library\n                                                    "
                                   ),
                                   _c("input", {
                                     directives: [
@@ -43334,7 +43401,7 @@ var render = function() {
                                 },
                                 [
                                   _vm._v(
-                                    "Others\n                                                "
+                                    "Others\n                                                    "
                                   ),
                                   _c("input", {
                                     directives: [
@@ -43380,7 +43447,7 @@ var render = function() {
                     _vm._v(" "),
                     _c("div", { staticClass: "col-6" }, [
                       _c("div", { staticClass: "row mt-2" }, [
-                        _vm._m(4),
+                        _vm._m(7),
                         _vm._v(" "),
                         _c("div", { staticClass: "col-md-12" }, [
                           _c("input", {
@@ -43464,9 +43531,30 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "card-title text-center" }, [
       _c("b", { staticStyle: { "font-size": "22px" } }, [
-        _vm._v("Products Detail")
+        _vm._v("Products Details")
       ])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h6", [
+      _c("strong", [_vm._v("Shelf status: ")]),
+      _vm._v("      ")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h6", [_c("strong", [_vm._v("Product Type:")]), _vm._v("    ")])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h6", [_c("strong", [_vm._v("Approval status: ")])])
   },
   function() {
     var _vm = this
@@ -43477,7 +43565,24 @@ var staticRenderFns = [
         _c(
           "th",
           {
-            staticClass: "sorting_asc",
+            staticClass: "sorting",
+            staticStyle: { width: "144px" },
+            attrs: {
+              tabindex: "0",
+              "aria-controls": "ajax-datatable",
+              rowspan: "1",
+              colspan: "1",
+              "aria-label": "Name: activate to sort column descending",
+              "aria-sort": "ascending"
+            }
+          },
+          [_vm._v("ID")]
+        ),
+        _vm._v(" "),
+        _c(
+          "th",
+          {
+            staticClass: "sorting",
             staticStyle: { width: "144px" },
             attrs: {
               tabindex: "0",
@@ -43627,6 +43732,8 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("tfoot", [
       _c("tr", [
+        _c("th", { attrs: { rowspan: "1", colspan: "1" } }, [_vm._v("ID")]),
+        _vm._v(" "),
         _c("th", { attrs: { rowspan: "1", colspan: "1" } }, [_vm._v("Image")]),
         _vm._v(" "),
         _c("th", { attrs: { rowspan: "1", colspan: "1" } }, [
@@ -44052,11 +44159,15 @@ var render = function() {
                           _vm._v(" "),
                           _c(
                             "tbody",
-                            _vm._l(_vm.data, function(user) {
+                            _vm._l(_vm.data, function(user, index) {
                               return _c(
                                 "tr",
                                 { staticClass: "odd", attrs: { role: "row" } },
                                 [
+                                  _c("td", { staticClass: "sorting_1" }, [
+                                    _vm._v(_vm._s(index + 1))
+                                  ]),
+                                  _vm._v(" "),
                                   _c("td", { staticClass: "sorting_1" }, [
                                     _vm._v(_vm._s(user.name))
                                   ]),
@@ -44339,7 +44450,7 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "col-md-6" }, [
+                    _c("div", { staticClass: "col-md-4" }, [
                       _c("div", { staticClass: "form-group" }, [
                         _c("label", { attrs: { for: "exampleInputEmail1" } }, [
                           _vm._v("Role")
@@ -44359,23 +44470,29 @@ var render = function() {
                             staticClass: "form-control valid",
                             attrs: { "aria-invalid": "false" },
                             on: {
-                              change: function($event) {
-                                var $$selectedVal = Array.prototype.filter
-                                  .call($event.target.options, function(o) {
-                                    return o.selected
-                                  })
-                                  .map(function(o) {
-                                    var val = "_value" in o ? o._value : o.value
-                                    return val
-                                  })
-                                _vm.$set(
-                                  _vm.add_user,
-                                  "role",
-                                  $event.target.multiple
-                                    ? $$selectedVal
-                                    : $$selectedVal[0]
-                                )
-                              }
+                              change: [
+                                function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    _vm.add_user,
+                                    "role",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                },
+                                function($event) {
+                                  return _vm.get_master_users()
+                                }
+                              ]
                             }
                           },
                           [
@@ -44401,7 +44518,70 @@ var render = function() {
                       ])
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "col-md-6" }, [
+                    _vm.user.role == "admin" &&
+                    _vm.add_user.role == "Child User"
+                      ? _c("div", { staticClass: "col-md-4" }, [
+                          _c("div", { staticClass: "form-group" }, [
+                            _c(
+                              "label",
+                              { attrs: { for: "exampleInputEmail1" } },
+                              [_vm._v("Select Master")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "select",
+                              {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.add_user.master_user_id,
+                                    expression: "add_user.master_user_id"
+                                  }
+                                ],
+                                staticClass: "form-control valid",
+                                attrs: { "aria-invalid": "false" },
+                                on: {
+                                  change: function($event) {
+                                    var $$selectedVal = Array.prototype.filter
+                                      .call($event.target.options, function(o) {
+                                        return o.selected
+                                      })
+                                      .map(function(o) {
+                                        var val =
+                                          "_value" in o ? o._value : o.value
+                                        return val
+                                      })
+                                    _vm.$set(
+                                      _vm.add_user,
+                                      "master_user_id",
+                                      $event.target.multiple
+                                        ? $$selectedVal
+                                        : $$selectedVal[0]
+                                    )
+                                  }
+                                }
+                              },
+                              [
+                                _c("option", { attrs: { value: "" } }, [
+                                  _vm._v("Select Role")
+                                ]),
+                                _vm._v(" "),
+                                _vm._l(_vm.master_users, function(data) {
+                                  return _c(
+                                    "option",
+                                    { domProps: { value: data.id } },
+                                    [_vm._v(_vm._s(data.name))]
+                                  )
+                                })
+                              ],
+                              2
+                            )
+                          ])
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-4" }, [
                       _c("div", { staticClass: "form-group" }, [
                         _c("label", { attrs: { for: "exampleInputEmail1" } }, [
                           _vm._v("Status")
@@ -44635,7 +44815,24 @@ var staticRenderFns = [
         _c(
           "th",
           {
-            staticClass: "sorting_asc",
+            staticClass: "sorting",
+            staticStyle: { width: "144px" },
+            attrs: {
+              tabindex: "0",
+              "aria-controls": "ajax-datatable",
+              rowspan: "1",
+              colspan: "1",
+              "aria-label": "Name: activate to sort column descending",
+              "aria-sort": "ascending"
+            }
+          },
+          [_vm._v("ID")]
+        ),
+        _vm._v(" "),
+        _c(
+          "th",
+          {
+            staticClass: "sorting",
             staticStyle: { width: "144px" },
             attrs: {
               tabindex: "0",
@@ -44737,6 +44934,8 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("tfoot", [
       _c("tr", [
+        _c("th", { attrs: { rowspan: "1", colspan: "1" } }, [_vm._v("ID")]),
+        _vm._v(" "),
         _c("th", { attrs: { rowspan: "1", colspan: "1" } }, [_vm._v("Name")]),
         _vm._v(" "),
         _c("th", { attrs: { rowspan: "1", colspan: "1" } }, [_vm._v("Email")]),
