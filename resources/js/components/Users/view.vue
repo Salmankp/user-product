@@ -343,7 +343,7 @@
                                     });
                                 });
 
-                            $('#exampleModal').toggle();
+                            $("#exampleModal .close").click();
                             $('#exampleModal').removeClass('.modal-backdrop.show');
                             }
                     }).catch(error => {

@@ -183,7 +183,7 @@
 
                     }).catch(error => {
                     });
-                    $('#exampleModal').toggle();
+                    $("#exampleModal .close").click();
                     $('#exampleModal').removeClass('.modal-backdrop.show');
                 }
             },

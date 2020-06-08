@@ -1084,7 +1084,7 @@
                             }
                         });
                         // $('#exampleModal').modal('toggle');
-                        $('#exampleModal').toggle();
+                        $("#exampleModal .close").click();
                         $('#exampleModal').removeClass('.modal-backdrop.show');
                     })
                 }

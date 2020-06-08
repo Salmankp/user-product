@@ -2086,7 +2086,7 @@ __webpack_require__.r(__webpack_exports__);
             });
           });
         })["catch"](function (error) {});
-        $('#exampleModal').toggle();
+        $("#exampleModal .close").click();
         $('#exampleModal').removeClass('.modal-backdrop.show');
       }
     },
@@ -3325,7 +3325,7 @@ __webpack_require__.r(__webpack_exports__);
             }
           }); // $('#exampleModal').modal('toggle');
 
-          $('#exampleModal').toggle();
+          $("#exampleModal .close").click();
           $('#exampleModal').removeClass('.modal-backdrop.show');
         });
       }
@@ -4170,7 +4170,7 @@ __webpack_require__.r(__webpack_exports__);
                 }
               });
             });
-            $('#exampleModal').toggle();
+            $("#exampleModal .close").click();
             $('#exampleModal').removeClass('.modal-backdrop.show');
           }
         })["catch"](function (error) {
