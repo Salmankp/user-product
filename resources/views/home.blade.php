@@ -68,5 +68,4 @@
 
     </div>
     <!--===========app body end===========-->
-    @include('_partials.footer')
 @endsection

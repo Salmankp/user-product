@@ -5,9 +5,6 @@
     <change-password :user="{{json_encode( Auth::user())}}"></change-password>
 </div>
 
-
-
-@include('_partials.footer')
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 {{--  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 

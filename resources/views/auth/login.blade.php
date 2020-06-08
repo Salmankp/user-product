@@ -15,13 +15,18 @@
             <h2 class="text-center">Logo</h2>
             <h2 class="form-signin-heading">Please sign in</h2>
             <div class="form-group">
-                <label for="email" class="sr-only">Email address</label>
-                <input type="email" id="email" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email address" required>
-                @error('email')
-                <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-                @enderror
+                <label for="email" class="sr-only">Username Or Email address</label>
+                <input type="text" id="identity" name="identity" class="form-control @error('email') is-invalid @enderror" placeholder="Username or Email address" required>
+                @if ($errors->any())
+                    @foreach ($errors->all() as $error)
+                        <div><span style="color: red">{{$error}}</span></div>
+                    @endforeach
+                @endif
+   {{--                @error('email')--}}
+{{--                <span class="invalid-feedback" role="alert">--}}
+{{--                <strong>{{ $message }}</strong>--}}
+{{--            </span>--}}
+{{--                @enderror--}}
             </div>
 
             <div class="form-group">

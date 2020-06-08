@@ -21,18 +21,22 @@
                                 <div class="row"><div class="col-sm-12"><table id="ajax-datatable" class="display table table-bordered table-striped dataTable" style="width: 100%;" role="grid" aria-describedby="ajax-datatable_info">
                                     <thead>
                                     <tr role="row">
-                                        <th class="sorting_asc" tabindex="0" aria-controls="ajax-datatable" rowspan="1" colspan="1" aria-label="Name: activate to sort column descending" aria-sort="ascending" style="width: 144px;">Name</th>
+                                        <th class="sorting" tabindex="0" aria-controls="ajax-datatable" rowspan="1" colspan="1" aria-label="Name: activate to sort column descending" aria-sort="ascending" style="width: 144px;">ID</th>
+                                        <th class="sorting" tabindex="0" aria-controls="ajax-datatable" rowspan="1" colspan="1" aria-label="Name: activate to sort column descending" aria-sort="ascending" style="width: 144px;">Name</th>
                                         <th class="sorting text-center" tabindex="0" aria-controls="ajax-datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 93px;">Action</th>
                                     </tr>
                                     </thead>
                                     <tfoot>
-                                    <tr><th rowspan="1" colspan="1">Name</th>
+                                    <tr>
+                                        <th rowspan="1" colspan="1">ID</th>
+                                        <th rowspan="1" colspan="1">Name</th>
                                         <th rowspan="1" colspan="1" class="text-center">Action</th>
                                     </tr>
                                     </tfoot>
                                     <tbody>
-                                    <tr role="row" class="odd" v-for="category in data">
-                                        <td class="sorting_1">{{category.title}}</td>
+                                    <tr role="row" class="odd" v-for="(category , index) in data">
+                                        <td class="">{{index+1}}</td>
+                                        <td class="">{{category.title}}</td>
                                         <td class="text-center"> <a href="#" class="btn btn-info btn-icon btn-sm edit"
                                                                     v-on:click="edit_user(category.id)">
                                             <i class="fa fa-edit"  title="Edit Category"></i></a>
@@ -118,6 +122,7 @@
                     jQuery.noConflict();
                     $(document).ready(function () {
                         self.product_datatable=$('#ajax-datatable').DataTable({
+                            "order": [[ 0, "desc" ]],
                             language: {
                                 search: "_INPUT_",
                                 searchPlaceholder: "Search records",
@@ -163,6 +168,7 @@
                         this.data = response.data;
                         $(document).ready(function () {
                             self.product_datatable = $('#ajax-datatable').DataTable({
+                                "order": [[ 0, "desc" ]],
                                 language: {
                                     search: "_INPUT_",
                                     searchPlaceholder: "Search records",
@@ -177,7 +183,7 @@
 
                     }).catch(error => {
                     });
-                    $('#exampleModal').toggle();
+                    $("#exampleModal .close").click();
                     $('#exampleModal').removeClass('.modal-backdrop.show');
                 }
             },
@@ -200,6 +206,7 @@
                             if (response.data) {
                                 $(document).ready(function () {
                                     self.product_datatable = $('#ajax-datatable').DataTable({
+                                        "order": [[ 0, "desc" ]],
                                         language: {
                                             search: "_INPUT_",
                                             searchPlaceholder: "Search records",
