@@ -63,10 +63,13 @@
                                             <option value="6">other</option>
                                         </select>
                                     </div>
+                                    <div class="col-md-2" v-if="user.role!='admin' && user.role!='Master User'">
+                                        <button @click="search" class="btn btn-sm btn-info text-left ml-2 mr-2">Search</button>
+                                        <button @click="reset_filter()" class="btn btn-sm btn-danger text-right">Reset</button>
+                                    </div>
                                 </div>
 
-                                <div class="row mt-1 mt-2">
-
+                                <div class="row mt-1 mt-2" v-if="user.role=='admin' || user.role=='Master User'">
                                     <div class="col-md-2 offset-md-10">
                                         <button @click="search" class="btn btn-sm btn-info text-left ml-5 mr-2">Search</button>
                                         <button @click="reset_filter()" class="btn btn-sm btn-danger text-right">Reset</button>
@@ -74,8 +77,6 @@
                                 </div>
 
                                 <div class="row mt-1 mt-2 px-4">
-
-
                                     <h6><strong>Shelf status: </strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h6>
 
                                     <span class="badge badge-info pt-2 mx-1">All {{(off_shelf_count+on_shelf_count+disable_count)}}</span>

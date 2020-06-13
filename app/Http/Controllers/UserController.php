@@ -63,7 +63,9 @@ class UserController extends Controller
         }
 
         $user->email=$request->add_user['email'];
-        $user->password=Hash::make($request->add_user['password']);
+        if ($request->add_user['password']) {
+            $user->password=Hash::make($request->add_user['password']);
+        }
         $user->extra_field_1=$request->add_user['field1'];
         $user->extra_field_2=$request->add_user['field2'];
         $user->extra_field_3=$request->add_user['field3'];

@@ -93,11 +93,11 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6" v-if="add_user.id==''">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Password</label>
                                         <input type="password" class="form-control"
-                                               aria-describedby="emailHelp" v-model="add_user.password"
+                                               aria-describedby="emailHelp" :value="add_user.password"
                                                placeholder="Enter Password">
                                     </div>
                                 </div>
