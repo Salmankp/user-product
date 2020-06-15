@@ -196,10 +196,10 @@ class UserController extends Controller
     }
     public function update_profile_view(Request $request)
     {
-        //return $request;
+//        return $request;
         $validator= $request->validate([
-            'username'=>'unique:users',
-            'email'=>'unique:users',
+            'username'=>'unique:users,username,'.$request->user_id,
+            'email'=>'unique:users,email,'.$request->user_id
         ]);
 
         User::where('id',$request->user_id)->update([
