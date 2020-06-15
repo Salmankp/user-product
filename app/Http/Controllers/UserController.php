@@ -199,11 +199,13 @@ class UserController extends Controller
 //        return $request;
         $validator= $request->validate([
             'username'=>'unique:users,username,'.$request->user_id,
-            'email'=>'unique:users,email,'.$request->user_id
+            'email'=>'unique:users,email,'.$request->user_id,
+            'name'=>'unique:users,name,'.$request->user_id
         ]);
 
         User::where('id',$request->user_id)->update([
            'username'=>$request->username,
+           'name'=>$request->name,
            'email'=>$request->email,
         ]);
         return response()->json('success',200);

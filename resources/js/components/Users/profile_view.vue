@@ -16,6 +16,14 @@
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
+                                <label for="exampleInputEmail1">Name</label>
+                                <input type="text" class="form-control"
+                                       aria-describedby="emailHelp" v-model="user.name"
+                                       placeholder="Enter Name">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
                                 <label for="exampleInputEmail1">Email</label>
                                 <input type="email" class="form-control"
                                        aria-describedby="emailHelp" v-model="user.email"
@@ -63,6 +71,14 @@
                         icon: "warning",
                     });
                 }
+                if(this.user.name=='') {
+                    flag=false;
+                    return swal({
+                        title: "Name is Required",
+                        text: "Please Enter Name",
+                        icon: "warning",
+                    });
+                }
                 if(this.user.email=='') {
                     flag = false;
                     return swal({
@@ -85,6 +101,7 @@
                     axios.post('/update/profile', {
                         email:this.user.email,
                         username:this.user.username,
+                        name:this.user.name,
                         user_id:this.user.id,
                     }).then((response) => {
                         if(response.data=='success')
